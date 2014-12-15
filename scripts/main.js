@@ -26,13 +26,26 @@
     })
   })
   .controller("PaymentController", function($http) {
-    var a = this; $http.get("https://openpaymentsdata.cms.gov/resource/identified-research-payments-2013.json?dispute_status_for_publication=No")
+    var a = this,
+    url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
+    phyFirstName = "physician_profile_first_name=Ayrika",
+    phyLastName = "&physician_profile_last_name=Bell";
+    $http.get(url + phyFirstName + phyLastName)
     .success(function(data) {
-      a.PCP = data;
-      console.log(a.PCP)
+      a.Provider = data;
+      console.log(a.Provider)
     })
     .error(function(err) {
       console.log(err);
     })
+  a.inspectPhysician = function(physician_id){  $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id="+physician_id)
+  .success(function(data){
+    a.Physician = data;
+    console.log(a.Physician)
+  })
+  .error(function(err){
+    console.log(err)
+  })
+  }
   })
 }());

@@ -12,11 +12,12 @@
   <div ng-controller="PaymentController as PC">
     <table class="table table-striped">
       <tr>
-        <th>term</th>
-        <th>count</th>
+        <th>Physician Name</th>
+        <th>Physician Specialty</th>
       </tr>
-      <tr ng-repeat="item in PC.PCP">
-          <td ng-repeat=" data in item | limitTo: 10"> {{item.total_amount_of_payment_usdollars}}</td>
+      <tr ng-repeat="item in PC.Provider">
+          <td ng-click="PC.inspectPhysician(physician_id)">{{item.physician_profile_last_name}}, {{item.physician_profile_first_name}} {{item.physician_profile_middle_name}}</td>
+          <td>{{item.physician_speciality}}</td>
         </tr>
       </tr>
     </table>
