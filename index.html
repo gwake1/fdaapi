@@ -9,6 +9,22 @@
 <body>
   <h1>FDA API Test</h1>
 
+  <div ng-controller="FDACallController as FDACC">
+    <table class="table table-striped">
+      <tr>
+        <th>term</th>
+        <th>count</th>
+      </tr>
+      <tr ng-repeat="results in FDACC.FDA">
+        <td>{{results.term}}</td>
+        <td>{{results.count}}</td>
+
+      </tr>
+
+    </table>
+
+  </div>
+
   <div ng-view></div>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
