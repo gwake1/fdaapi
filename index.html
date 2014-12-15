@@ -8,52 +8,7 @@
 </head>
 <body>
   <h1>FDA API Test</h1>
-
-  <div ng-controller="PaymentController as PC">
-    <table class="table table-striped">
-      <tr>
-        <th>Physician Name</th>
-        <th>Physician Specialty</th>
-      </tr>
-      <tr ng-repeat="item in PC.Provider">
-          <td ng-click="PC.inspectPhysician(physician_id)">{{item.physician_profile_last_name}}, {{item.physician_profile_first_name}} {{item.physician_profile_middle_name}}</td>
-          <td>{{item.physician_speciality}}</td>
-        </tr>
-      </tr>
-    </table>
-  </div>
-
-  <div ng-controller="FDABrandController as FDABC">
-    <table class="table table-striped">
-      <tr>
-        <th>term</th>
-        <th>count</th>
-      </tr>
-      <tr ng-repeat="results in FDABC.FDAB">
-        <td>{{results.term}}</td>
-        <td>{{results.count}}</td>
-
-      </tr>
-    </table>
-  </div>
-
-
-  <div ng-controller="FDACallController as FDACC">
-    <table class="table table-striped">
-      <tr>
-        <th>term</th>
-        <th>count</th>
-      </tr>
-      <tr ng-repeat="results in FDACC.FDA">
-        <td>{{results.term}}</td>
-        <td>{{results.count}}</td>
-
-      </tr>
-
-    </table>
-
-  </div>
-
+  
   <div ng-view></div>
 
   <script src="bower_components/jquery/dist/jquery.min.js"></script>

@@ -1,6 +1,17 @@
 (function() {
   "use strict";
-  angular.module("myApp", [])
+  angular.module("myApp", [ "ngRoute", "mgcrea.ngStrap" ] )
+  .config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+      templateUrl: "views/table.html"
+    })
+    .when("/:physician_id", {
+      templateUrl: "views/physician.html",
+      controller: "PhysicianController",
+      controllerAs: "PHYC"
+    })
+  })
   .controller("FDACallController", function($http) {
     var a = this,
     url = "https://api.fda.gov/drug/event.json?api_key=Xgd5lx8BAGRQThoeLjBRWRApQZxr6o9Qh87R3rbU&search=";
@@ -11,6 +22,18 @@
     })
     .error(function(err) {
       console.log(err);
+    })
+  })
+  .controller("PhysicianController", function($http, $routeParams) {
+    var a = this,
+    physician_id = $routeParams.physician_id;
+ $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=" + physician_id)
+    .success(function(data) {
+      a.Physician = data[0];
+      console.log(a.Physician)
+    })
+    .error(function(err) {
+      console.log(err)
     })
   })
   .controller("FDABrandController", function($http) {
