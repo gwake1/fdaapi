@@ -9,6 +9,34 @@
 <body>
   <h1>FDA API Test</h1>
 
+  <div ng-controller="PaymentController as PC">
+    <table class="table table-striped">
+      <tr>
+        <th>term</th>
+        <th>count</th>
+      </tr>
+      <tr ng-repeat="item in PC.PCP">
+          <td ng-repeat=" data in item | limitTo: 10"> {{item.total_amount_of_payment_usdollars}}</td>
+        </tr>
+      </tr>
+    </table>
+  </div>
+
+  <div ng-controller="FDABrandController as FDABC">
+    <table class="table table-striped">
+      <tr>
+        <th>term</th>
+        <th>count</th>
+      </tr>
+      <tr ng-repeat="results in FDABC.FDAB">
+        <td>{{results.term}}</td>
+        <td>{{results.count}}</td>
+
+      </tr>
+    </table>
+  </div>
+
+
   <div ng-controller="FDACallController as FDACC">
     <table class="table table-striped">
       <tr>
@@ -27,13 +55,13 @@
 
   <div ng-view></div>
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
-<script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
-<script src="scripts/main.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>
