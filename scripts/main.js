@@ -4,13 +4,24 @@
   .config(function($routeProvider) {
     $routeProvider
     .when("/", {
-      templateUrl: "views/table.html"
+      templateUrl: "views/home.html"
     })
-    .when("/:physician_id", {
+    .when("/physearch", {
+      templateUrl: "views/physearch.html",
+      controller: "PhysicianSearchController",
+      controllerAs: "PHYC"
+    })
+    .when("/physearch/:physician_id", {
       templateUrl: "views/physician.html",
       controller: "PhysicianController",
       controllerAs: "PHYC"
     })
+    .when("/rxsearch", {
+      templateUrl: "views/rxsearch.html",
+      controller: "RxSearchController",
+      controllerAs: "RxSC"
+    })
+    .otherwise({ redirectTo: "/" });
   })
   .controller("FDACallController", function($http) {
     var a = this,
