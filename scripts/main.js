@@ -14,7 +14,7 @@
     .when("/physearch/:physician_id", {
       templateUrl: "views/physician.html",
       controller: "PhysicianController",
-      controllerAs: "PHYC"
+      controllerAs: "PHYSC"
     })
     .when("/rxsearch", {
       templateUrl: "views/rxsearch.html",
@@ -38,7 +38,7 @@
   .controller("PhysicianController", function($http, $routeParams) {
     var a = this,
     physician_id = $routeParams.physician_id;
- $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=" + physician_id)
+    $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=" + physician_id)
     .success(function(data) {
       a.Physician = data[0];
       console.log(a.Physician)
@@ -59,27 +59,34 @@
       console.log(err);
     })
   })
-  .controller("PaymentController", function($http) {
+  .controller("PhysicianSearchController", function($http, $rootScope) {
     var a = this,
-    url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
-    phyFirstName = "physician_profile_first_name=Ayrika",
-    phyLastName = "&physician_profile_last_name=Bell";
-    $http.get(url + phyFirstName + phyLastName)
-    .success(function(data) {
-      a.Provider = data;
-      console.log(a.Provider)
-    })
-    .error(function(err) {
-      console.log(err);
-    })
-  a.inspectPhysician = function(physician_id){  $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id="+physician_id)
-  .success(function(data){
-    a.Physician = data;
-    console.log(a.Physician)
-  })
-  .error(function(err){
-    console.log(err)
-  })
-  }
+    phy = {},
+    specialtyOptions = {
+      familyPractice: "Allopathic & Osteopathic Physicians/ Family Medicine"
+    };
+    a.searchPhysician = function() {
+      var url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
+      phyFirstName = "physician_profile_first_name=" + phy.firstName,
+      phyLastName = "&physician_profile_last_name=" + phy.lastName;
+      $http.get(url + phyFirstName + phyLastName)
+      .success(function(data) {
+        a.Provider = data;
+        console.log(a.Provider)
+      })
+      .error(function(err) {
+        console.log(err);
+      })
+    }
+    a.inspectPhysician = function(physician_id){
+      var url =   $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id="+physician_id)
+      .success(function(data) {
+        a.Physician = data;
+        console.log(a.Physician)
+      })
+      .error(function(err) {
+        console.log(err)
+      })
+    }
   })
 }());

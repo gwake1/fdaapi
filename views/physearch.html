@@ -1,7 +1,52 @@
 <h1>Physician Search</h1>
-<form>
-  <div>
-    <label for="firstName">First Name</label>
-    <input id="firstName" type="text">
+
+<div>
+  {{PHYSC.specialtyOptions}}
+  {{PHYSC.phy.firstName}}
+  {{PHYSC.phy.lastName}}
+  {{PHYSC.phy.city}}
+  {{PHYSC.phy.state}}
+  {{PHYSC.phy.specialty}}
+
+</div>
+<form ng-controller="PhysicianSearchController as PHYSC"ng-submit="PHYSC.searchPhysician()">
+  <div class="form-group">
+    <label class="control-label" for="firstName">First Name</label>
+    <input class="form-contorl" id="firstName" type="text" ng-model="PHYSC.phy.firstName">
   </div>
+  <div class="form-group">
+    <label class="control-label" for="lastName">Last Name</label>
+    <input class="form-contorl" id="lastName" type="text" ng-model="PHYSC.phy.lastName">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="City">City</label>
+    <input class="form-contorl" id="City" type="text" ng-model="PHYSC.phy.city">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="State">State</label>
+    <input class="form-contorl" id="State" type="text" ng-model="PHYSC.phy.state">
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="Specialty">Specialty</label>
+    <select name="Specialty" id="Specialty" ng-model="PHYSC.phy.specialty">
+      <option value="{{val}}" ng-repeat="(val, text) in PHYSC.specialtyOptions">
+        {{text}}
+      </option>
+    </select>
+  </div>
+  <input type="submit" value="Search Physician">
 </form>
+
+<div ng-controller="PhysicianSearchController as PHYSC">
+  <table class="table table-striped">
+    <tr>
+      <th>Physician Name</th>
+      <th>Physician Specialty</th>
+    </tr>
+    <tr ng-repeat="item in PHYSC.Provider">
+      <td><a href="/#/physearch/{{item.physician_id}}">{{item.physician_profile_last_name}}, {{item.physician_profile_first_name}} {{item.physician_profile_middle_name}}</a></td>
+      <td>{{item.physician_speciality}}</td>
+    </tr>
+  </tr>
+</table>
+</div>
