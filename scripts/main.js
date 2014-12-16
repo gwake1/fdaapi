@@ -9,7 +9,7 @@
     .when("/physearch", {
       templateUrl: "views/physearch.html",
       controller: "PhysicianSearchController",
-      controllerAs: "PHYC"
+      controllerAs: "PHYSC"
     })
     .when("/physearch/:physician_id", {
       templateUrl: "views/physician.html",
@@ -59,20 +59,20 @@
       console.log(err);
     })
   })
-  .controller("PhysicianSearchController", function($http, $rootScope) {
-    var a = this,
-    phy = {},
-    specialtyOptions = {
+  .controller("PhysicianSearchController", function($http, $scope) {
+    var a = this;
+    a.specialtyOptions = {
       familyPractice: "Allopathic & Osteopathic Physicians/ Family Medicine"
     };
+    a.phy = {};
     a.searchPhysician = function() {
       var url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
-      phyFirstName = "physician_profile_first_name=" + phy.firstName,
-      phyLastName = "&physician_profile_last_name=" + phy.lastName;
+      phyFirstName = "physician_profile_first_name=" + a.phy.firstName,
+      phyLastName = "&physician_profile_last_name=" + a.phy.lastName;
       $http.get(url + phyFirstName + phyLastName)
       .success(function(data) {
         a.Provider = data;
-        console.log(a.Provider)
+        console.log(a.Provider);
       })
       .error(function(err) {
         console.log(err);
