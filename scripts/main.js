@@ -46,11 +46,17 @@
     .success(function(data) {
       a.Physician = data[0];
       a.generalPaymentData();
-      console.log(a.Physician)
     })
     .error(function(err) {
       console.log(err)
     })
+    a.phyGenTotalPMT = function(phy) {
+      var a = this;
+      a.phyGenPMTTotal = 0;
+      $(phy).each(function(index) {
+      a.phyGenPMTTotal = a.phyGenPMTTotal + Number(phy[index].total_amount_of_payment_usdollars, 2);
+      })
+    }
     a.generalPaymentData = function() {
       var a = this,
       url = "https://openpaymentsdata.cms.gov/resource/identified-general-payments-2013.json?physician_profile_id=",
@@ -58,6 +64,7 @@
       $http.get(url + phyProfileId)
       .success(function(data) {
         a.genPMTData = data;
+        a.phyGenTotalPMT(a.genPMTData)
         console.log(a.genPMTData);
       })
       .error(function(err) {

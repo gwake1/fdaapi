@@ -1,6 +1,6 @@
 <h1>{{PHYSC.Physician.physician_profile_last_name}}, {{PHYSC.Physician.physician_profile_first_name}} {{PHYSC.Physician.physician_profile_middle_name}}</h1>
 <h2>{{PHYSC.Physician.physician_speciality}}</h2>
-{{value}}
+{{PHYSC.phyGenPMTTotal | currency:"$":2}}
 <div>
   <h3 ng-model="collapsed" ng-click="collapsed=!collapsed">Companies Submitting General Payment</h3>
   <table ng-show="collapsed">
@@ -14,9 +14,10 @@
       </a>
     </td>
   </tr>
-</div>
-<table>
-  <tr ng-repeat="item2 in PHYSC.genPMTData | filter:PHYSC.filters">
-    <td>{{item2.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
-  </tr>
+  <table ng-show="collapsed">
+    <tr ng-repeat="item2 in PHYSC.genPMTData | filter:PHYSC.filters">
+      <td>{{item2.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
+    </tr>
+  </table>
 </table>
+</div>
