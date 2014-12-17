@@ -39,6 +39,9 @@
     var a = this,
     physician_id = $routeParams.physician_id,
     url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=";
+
+    a.filters = {};
+
     $http.get(url + physician_id)
     .success(function(data) {
       a.Physician = data[0];
@@ -74,14 +77,14 @@
       console.log(err);
     })
   })
-  .controller("PhysicianSearchController", function($http, $scope) {
+  .controller("PhysicianSearchController", function($http) {
     var a = this;
+
     a.specialityOptions1 = {
       "Allopathic & Osteopathic Physicians/ Family Medicine": "Family Practice",
       "Allopathic & Osteopathic Physicians/ Internal Medicine": "Internal Medicine",
       "Allopathic & Osteopathic Physicians/ Pediatrics": "Pediatrics"
     };
-    a.phy = {};
     a.searchPhysician = function() {
       var url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
       phyFirstName = a.phy.firstName ? "physician_profile_first_name=" + a.phy.firstName + "&" : "",
@@ -97,10 +100,6 @@
       .error(function(err) {
         console.log(err);
       })
-    }
-    a.genPMTExpand = function() {
-      var company = this;
-      console.log("clicked")
     }
     // a.inspectPhysician = function(physician_id){
     //   var url =   $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id="+physician_id)

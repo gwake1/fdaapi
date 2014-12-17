@@ -9,6 +9,14 @@
       ng-class="{red: hover}"
       ng-mouseenter="hover = true"
       ng-mouseleave="hover = false">
-      {{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
-    </tr>
-  </div>
+      <a ng-click="PHYSC.filters.submitting_applicable_manufacturer_or_applicable_gpo_name = item.submitting_applicable_manufacturer_or_applicable_gpo_name">
+        {{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}
+      </a>
+    </td>
+  </tr>
+</div>
+<table>
+  <tr ng-repeat="item2 in PHYSC.genPMTData | filter:PHYSC.filters">
+    <td>{{item2.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
+  </tr>
+</table>
