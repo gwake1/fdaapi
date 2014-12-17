@@ -98,6 +98,10 @@
         console.log(err);
       })
     }
+    a.genPMTExpand = function() {
+      var company = this;
+      console.log("clicked")
+    }
     // a.inspectPhysician = function(physician_id){
     //   var url =   $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id="+physician_id)
     //   .success(function(data) {
