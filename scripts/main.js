@@ -76,7 +76,7 @@
   })
   .controller("PhysicianSearchController", function($http, $scope) {
     var a = this;
-    a.specialityOptions = {
+    a.specialityOptions1 = {
       "Allopathic & Osteopathic Physicians/ Family Medicine": "Family Practice",
       "Allopathic & Osteopathic Physicians/ Internal Medicine": "Internal Medicine",
       "Allopathic & Osteopathic Physicians/ Pediatrics": "Pediatrics"
@@ -87,11 +87,12 @@
       phyFirstName = a.phy.firstName ? "physician_profile_first_name=" + a.phy.firstName + "&" : "",
       phyLastName = a.phy.lastName ? "physician_profile_last_name=" + a.phy.lastName + "&" : "",
       phyCity = a.phy.city ? "physician_profile_city=" + a.phy.city + "&" : "",
-      phyState = a.phy.state ? "physician_profile_state=" + a.phy.state + "&" : "",
-      phySpeciality = a.phy.speciality ? "physician_speciality=" + a.phy.speciality + "&" : "";
+      phyState = a.phy.state ? "physician_profile_state=" + a.phy.state : "",
+      phySpeciality = a.phy.speciality ? "&physician_speciality=" + a.phy.speciality + "&" : "";
       $http.get(url + phyFirstName + phyLastName + phyCity + phyState + phySpeciality)
       .success(function(data) {
         a.Provider = data;
+        console.log(a.Provider)
       })
       .error(function(err) {
         console.log(err);

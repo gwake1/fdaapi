@@ -4,7 +4,7 @@
 <h3>Company Submitting Payment</h3>
 <div>
   <table>
-    <tr ng-repeat="item in PHYSC.genPMTData track by $index">
+    <tr ng-repeat="item in PHYSC.genPMTData | unique:'submitting_applicable_manufacturer_or_applicable_gpo_name'">
       <td>{{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
     </tr>
   </table>
