@@ -1,6 +1,6 @@
 (function() {
   "use strict";
-  angular.module("myApp", [ "ngRoute", "mgcrea.ngStrap" ] )
+  angular.module("myApp", [ "ngRoute", "mgcrea.ngStrap", "ui.utils" ])
   .config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -37,14 +37,30 @@
   })
   .controller("PhysicianController", function($http, $routeParams) {
     var a = this,
-    physician_id = $routeParams.physician_id;  $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=" + physician_id)
+    physician_id = $routeParams.physician_id,
+    url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=";
+    $http.get(url + physician_id)
     .success(function(data) {
       a.Physician = data[0];
+      a.generalPaymentData();
       console.log(a.Physician)
     })
     .error(function(err) {
       console.log(err)
     })
+    a.generalPaymentData = function() {
+      var a = this,
+      url = "https://openpaymentsdata.cms.gov/resource/identified-general-payments-2013.json?physician_profile_id=",
+      phyProfileId = a.Physician.physician_profile_id;
+      $http.get(url + phyProfileId)
+      .success(function(data) {
+        a.genPMTData = data;
+        console.log(a.genPMTData);
+      })
+      .error(function(err) {
+        console.log(err)
+      })
+    }
   })
   .controller("FDABrandController", function($http) {
     var a = this,
@@ -69,7 +85,7 @@
     a.searchPhysician = function() {
       var url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
       phyFirstName = a.phy.firstName ? "physician_profile_first_name=" + a.phy.firstName + "&" : "",
-      phyLastName = a.phy.lastName ? "&physician_profile_last_name=" + a.phy.lastName + "&" : "",
+      phyLastName = a.phy.lastName ? "physician_profile_last_name=" + a.phy.lastName + "&" : "",
       phyCity = a.phy.city ? "physician_profile_city=" + a.phy.city + "&" : "",
       phyState = a.phy.state ? "physician_profile_state=" + a.phy.state + "&" : "",
       phySpeciality = a.phy.speciality ? "physician_speciality=" + a.phy.speciality + "&" : "";

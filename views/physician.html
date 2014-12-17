@@ -1,2 +1,11 @@
 <h1>{{PHYSC.Physician.physician_profile_last_name}}, {{PHYSC.Physician.physician_profile_first_name}} {{PHYSC.Physician.physician_profile_middle_name}}</h1>
 <h2>{{PHYSC.Physician.physician_speciality}}</h2>
+
+<h3>Company Submitting Payment</h3>
+<div>
+  <table>
+    <tr ng-repeat="item in PHYSC.genPMTData track by $index">
+      <td>{{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
+    </tr>
+  </table>
+</div>
