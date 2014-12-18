@@ -1,22 +1,33 @@
 <h1>{{PHYSC.Physician.physician_profile_last_name}}, {{PHYSC.Physician.physician_profile_first_name}} {{PHYSC.Physician.physician_profile_middle_name}}</h1>
 <h2>{{PHYSC.Physician.physician_speciality}}</h2>
-{{PHYSC.phyGenPMTTotal | currency:"$":2}}
 <div>
-  <h3 ng-model="collapsed" ng-click="collapsed=!collapsed">Companies Submitting General Payment</h3>
+  <h3 ng-model="collapsed" ng-click="collapsed=!collapsed">Companies Submitting General Payment: {{PHYSC.phyGenPMTTotal | currency:"$":2}}</h3>
   <table ng-show="collapsed">
-    <tr ng-repeat="item in PHYSC.genPMTData | unique:'submitting_applicable_manufacturer_or_applicable_gpo_name'">
-      <td
-      ng-class="{red: hover}"
+    <tr>
+      <td class="GenPMTCo" ng-repeat="item in PHYSC.genPMTData | unique:'submitting_applicable_manufacturer_or_applicable_gpo_name'"
+      ng-class="{RxCoBlue: hover}"
       ng-mouseenter="hover = true"
-      ng-mouseleave="hover = false">
-      <a ng-click="PHYSC.filters.submitting_applicable_manufacturer_or_applicable_gpo_name = item.submitting_applicable_manufacturer_or_applicable_gpo_name">
-        {{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}
-      </a>
+      ng-mouseleave="hover = false"
+      ng-click="PHYSC.filters.submitting_applicable_manufacturer_or_applicable_gpo_name = item.submitting_applicable_manufacturer_or_applicable_gpo_name">
+      {{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}
     </td>
   </tr>
-  <table ng-show="collapsed">
-    <tr ng-repeat="item2 in PHYSC.genPMTData | filter:PHYSC.filters">
-      <td>{{item2.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
+  <table ng-show="collapsed" class="table table-striped">
+    <tr>
+      <th>Company</th>
+      <th><a href="" ng-click="predicate='name_of_associated_covered_drug_or_biological'; reverse=!reverse">Associated Drug</a></th>
+      <th>Associated Device</th>
+      <th>Payment Type</th>
+      <th>Value</th>
+      <th>Date</th>
+    </tr>
+    <tr ng-repeat="item in PHYSC.genPMTData | filter:PHYSC.filters | orderBy:predicate:reverse">
+      <td>{{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
+      <td>{{item.name_of_associated_covered_drug_or_biological1}}</td>
+      <td>{{item.name_of_associated_covered_device_or_medical_supply1}}</td>
+      <td>{{item.nature_of_payment_or_transfer_of_value}}</td>
+      <td>{{item.total_amount_of_payment_usdollars | currency:"$":2}}</td>
+      <td>{{item.date_of_payment | date:"MM/dd/yyyy"}}</td>
     </tr>
   </table>
 </table>

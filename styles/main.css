@@ -1,3 +1,12 @@
-.red {
-  background-color: red;
+.GenPMTCo {
+  padding: 1em;
 }
+
+.RxCoBlue {
+  background-color: #5ED9FF;
+  }html,body {
+    Extra Styles
+    background: #fff;
+    color: #425363;
+    font-family: avenir, 'segoe ui', sans-serif;
+  }

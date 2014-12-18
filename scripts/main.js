@@ -35,13 +35,19 @@
       console.log(err);
     })
   })
-  .controller("PhysicianController", function($http, $routeParams) {
+  .controller("PhysicianController", function($http, $routeParams, $scope) {
     var a = this,
     physician_id = $routeParams.physician_id,
     url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=";
-
+    a.getTotal = function() {
+      var dynsum = 0;
+      for ( var i = 0 ; i < a.genPMTData.length ; i++ ) {
+        var product = a.genPMTData[i];
+        dynsum += a.genPMTData[i].total_amount_of_payment_usdollars;
+      }
+      return dynsum;
+    }
     a.filters = {};
-
     $http.get(url + physician_id)
     .success(function(data) {
       a.Physician = data[0];
@@ -54,7 +60,7 @@
       var a = this;
       a.phyGenPMTTotal = 0;
       $(phy).each(function(index) {
-      a.phyGenPMTTotal = a.phyGenPMTTotal + Number(phy[index].total_amount_of_payment_usdollars, 2);
+        a.phyGenPMTTotal = a.phyGenPMTTotal + Number(phy[index].total_amount_of_payment_usdollars, 2);
       })
     }
     a.generalPaymentData = function() {
@@ -84,7 +90,7 @@
       console.log(err);
     })
   })
-  .controller("PhysicianSearchController", function($http) {
+  .controller("PhysicianSearchController", function($http, $location) {
     var a = this;
 
     a.specialityOptions1 = {
@@ -102,11 +108,15 @@
       $http.get(url + phyFirstName + phyLastName + phyCity + phyState + phySpeciality)
       .success(function(data) {
         a.Provider = data;
+        a.predicate = "date_of_payment"
         console.log(a.Provider)
       })
       .error(function(err) {
         console.log(err);
       })
+    }
+    a.goToPhysician = function(physician_id) {
+      $location.path("/physearch/" + physician_id)
     }
     // a.inspectPhysician = function(physician_id){
     //   var url =   $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id="+physician_id)

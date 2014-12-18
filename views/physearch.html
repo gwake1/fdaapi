@@ -1,13 +1,5 @@
 <h1>Physician Search</h1>
 
-<div>
-  {{PHYSC.phy.firstName}}
-  {{PHYSC.phy.lastName}}
-  {{PHYSC.phy.city}}
-  {{PHYSC.phy.state}}
-  {{PHYSC.phy.speciality}}
-
-</div>
 <form name="PhysicianSearchForm" ng-submit="PHYSC.searchPhysician()">
   <div class="form-group">
     <label class="control-label" for="firstName">First Name</label>
@@ -43,7 +35,7 @@
       <th>Physician speciality</th>
     </tr>
     <tr ng-repeat="item in PHYSC.Provider">
-      <td><a href="/#/physearch/{{item.physician_id}}">{{item.physician_profile_last_name}}, {{item.physician_profile_first_name}} {{item.physician_profile_middle_name}}</a></td>
+      <td ng-click="PHYSC.goToPhysician(item.physician_id)"><a>{{item.physician_profile_last_name}}, {{item.physician_profile_first_name}} {{item.physician_profile_middle_name}}</a></td>
       <td>{{item.physician_speciality}}</td>
     </tr>
   </tr>
