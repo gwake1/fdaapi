@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>FDA App Test</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="styles/neat.css">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <h1>FDA API Test</h1>
+  <div>
+    <a class="btn btn-primary" href="/#/">Home</a>
+    <a class="btn btn-primary" href="/#/physearch">Physician Search</a>
+    <a class="btn btn-primary" href="/#/rxsearch">Drug Search</a>
+  </div>
+
+  <div ng-view></div>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-ui-utils/ui-utils.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script>
+  <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

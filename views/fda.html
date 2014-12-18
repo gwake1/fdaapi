@@ -1,0 +1,27 @@
+<div ng-controller="FDABrandController as FDABC">
+  <table class="table table-striped">
+    <tr>
+      <th>term</th>
+      <th>count</th>
+    </tr>
+    <tr ng-repeat="results in FDABC.FDAB">
+      <td>{{results.term}}</td>
+      <td>{{results.count}}</td>
+    </tr>
+  </table>
+</div>
+
+
+<div ng-controller="FDACallController as FDACC">
+  <table class="table table-striped">
+    <tr>
+      <th>term</th>
+      <th>count</th>
+    </tr>
+    <tr ng-repeat="results in FDACC.FDA">
+      <td>{{results.term}}</td>
+      <td>{{results.count}}</td>
+    </tr>
+  </table>
+
+</div>
