@@ -23,6 +23,28 @@
     })
     .otherwise({ redirectTo: "/" });
   })
+  .controller("RxSearchController", function($http) {
+    var a = this,
+    formulary = [],
+    url = "https://nadacpu.firebaseio.com/data/",
+    ref = new Firebase("https://ndcdatareturn.firebaseio.com/");
+    $http.get(url)
+    .success(function(data) {
+      for ( var i = 0; i < data.length; i++ ) {
+        $http.get(url + i + ".json")
+        .success(function(data) {
+          a.NDC = data.NDC;
+          var nDC = a.NDC,
+          formularyitem = data;
+          formulary.push(formularyitem);
+          ref.child("data").child(nDC).set(formularyitem)
+        })
+        .error(function(err) {
+          console.log(err)
+        })
+      }
+    })
+  })
   .controller("FDACallController", function($http) {
     var a = this,
     url = "https://api.fda.gov/drug/event.json?api_key=Xgd5lx8BAGRQThoeLjBRWRApQZxr6o9Qh87R3rbU&search=";
