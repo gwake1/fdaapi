@@ -21,6 +21,11 @@
       controller: "RxSearchController",
       controllerAs: "RxSC"
     })
+    .when("/rxsearch/:ndc_of_associated_covered_drug_or_biological1", {
+      templateUrl: "views/rxsearchNDC.html",
+      controller: "RxSearchController",
+      controllerAs: "RxSC"
+    })
     .otherwise({ redirectTo: "/" });
   })
   .controller("FDACallController", function($http) {
@@ -33,6 +38,18 @@
     })
     .error(function(err) {
       console.log(err);
+    })
+  })
+  .controller("RxSearchController", function($http, $routeParams, $scope) {
+    var a = this,
+    NDC = $routeParams.ndc_of_associated_covered_drug_or_biological1 + ".json",
+    url = "https://ndcdatareturn.firebaseio.com/data/";
+    $http.get(url + NDC)
+    .success(function(data) {
+      console.log(data)
+    })
+    .error(function(err) {
+      console.log(err)
     })
   })
   .controller("PhysicianController", function($http, $routeParams, $scope) {
