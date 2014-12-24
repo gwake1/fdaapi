@@ -21,29 +21,12 @@
       controller: "RxSearchController",
       controllerAs: "RxSC"
     })
-    .otherwise({ redirectTo: "/" });
-  })
-  .controller("RxSearchController", function($http) {
-    var a = this,
-    formulary = [],
-    url = "https://nadacpu.firebaseio.com/data/",
-    ref = new Firebase("https://ndcdatareturn.firebaseio.com/");
-    $http.get(url)
-    .success(function(data) {
-      for ( var i = 0; i < data.length; i++ ) {
-        $http.get(url + i + ".json")
-        .success(function(data) {
-          a.NDC = data.NDC;
-          var nDC = a.NDC,
-          formularyitem = data;
-          formulary.push(formularyitem);
-          ref.child("data").child(nDC).set(formularyitem)
-        })
-        .error(function(err) {
-          console.log(err)
-        })
-      }
+    .when("/rxsearch/:ndc_of_associated_covered_drug_or_biological1", {
+      templateUrl: "views/rxsearchNDC.html",
+      controller: "RxSearchController",
+      controllerAs: "RxSC"
     })
+    .otherwise({ redirectTo: "/" });
   })
   .controller("FDACallController", function($http) {
     var a = this,
@@ -55,6 +38,18 @@
     })
     .error(function(err) {
       console.log(err);
+    })
+  })
+  .controller("RxSearchController", function($http, $routeParams, $scope) {
+    var a = this,
+    NDC = $routeParams.ndc_of_associated_covered_drug_or_biological1 + ".json",
+    url = "https://ndcdatareturn.firebaseio.com/data/";
+    $http.get(url + NDC)
+    .success(function(data) {
+      console.log(data)
+    })
+    .error(function(err) {
+      console.log(err)
     })
   })
   .controller("PhysicianController", function($http, $routeParams, $scope) {
