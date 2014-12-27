@@ -14,14 +14,14 @@
   </tr>
   <table ng-show="collapsed" class="table table-striped">
     <tr>
-      <th>Company</th>
-      <th><a href="" ng-click="predicate='name_of_associated_covered_drug_or_biological'; reverse=!reverse">Associated Drug</a></th>
-      <th>Associated Device</th>
-      <th>Payment Type</th>
-      <th>Value</th>
-      <th>Date</th>
+      <th ng-click="sortBy='submitting_applicable_manufacturer_or_applicable_gpo_name'; reverse=!reverse">Company</th>
+      <th ng-click="sortBy='name_of_associated_covered_drug_or_biological1'; reverse=!reverse">Associated Drug</th>
+      <th ng-click="sortBy='name_of_associated_covered_device_or_medical_supply1'; reverse=!reverse">Associated Device</th>
+      <th ng-click="sortBy='nature_of_payment_or_transfer_of_value'; reverse=!reverse">Payment Type</th>
+      <th ng-click="sortBy='total_amount_of_payment_usdollars'; reverse=!reverse">Value</th>
+      <th ng-click="sortBy='date_of_payment'; reverse=!reverse">Date</th>
     </tr>
-    <tr ng-repeat="item in PHYSC.genPMTData | filter:PHYSC.filters | orderBy:predicate:reverse">
+    <tr ng-repeat="item in PHYSC.genPMTData | filter:PHYSC.filters | orderBy:predicate:reverse | orderBy:sortBy:reverse">
       <td>{{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
       <td><a href="/#/rxsearch/{{item.ndc_of_associated_covered_drug_or_biological1}}">{{item.name_of_associated_covered_drug_or_biological1}}</a></td>
       <td>{{item.name_of_associated_covered_device_or_medical_supply1}}</td>
