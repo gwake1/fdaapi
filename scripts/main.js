@@ -107,43 +107,4 @@
       console.log(err);
     })
   })
-  .controller("PhysicianSearchController", function($http, $location) {
-    var a = this;
-
-    a.specialityOptions1 = {
-      "Allopathic & Osteopathic Physicians/ Family Medicine": "Family Practice",
-      "Allopathic & Osteopathic Physicians/ Internal Medicine": "Internal Medicine",
-      "Allopathic & Osteopathic Physicians/ Pediatrics": "Pediatrics"
-    };
-    a.searchPhysician = function() {
-      var url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
-      phyFirstName = a.phy.firstName ? "physician_profile_first_name=" + a.phy.firstName + "&" : "",
-      phyLastName = a.phy.lastName ? "physician_profile_last_name=" + a.phy.lastName + "&" : "",
-      phyCity = a.phy.city ? "physician_profile_city=" + a.phy.city + "&" : "",
-      phyState = a.phy.state ? "physician_profile_state=" + a.phy.state : "",
-      phySpeciality = a.phy.speciality ? "&physician_speciality=" + a.phy.speciality + "&" : "";
-      $http.get(url + phyFirstName + phyLastName + phyCity + phyState + phySpeciality)
-      .success(function(data) {
-        a.Provider = data;
-        a.predicate = "date_of_payment"
-        console.log(a.Provider)
-      })
-      .error(function(err) {
-        console.log(err);
-      })
-    }
-    a.goToPhysician = function(physician_id) {
-      $location.path("/physearch/" + physician_id)
-    }
-    // a.inspectPhysician = function(physician_id){
-    //   var url =   $http.get("https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id="+physician_id)
-    //   .success(function(data) {
-    //     a.Physician = data;
-    //     console.log(a.Physician)
-    //   })
-    //   .error(function(err) {
-    //     console.log(err)
-    //   })
-    // }
-  })
 }());

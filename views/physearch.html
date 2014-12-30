@@ -34,7 +34,7 @@
       <th ng-click="sortBy='physician_profile_last_name'; reverse=!reverse">Physician Name</th>
       <th ng-click="sortBy='physician_speciality'; reverse=!reverse">Physician speciality</th>
     </tr>
-    <tr ng-repeat="item in PHYSC.Provider | orderBy:sortBy:reverse">
+    <tr ng-repeat="item in PHYSC.provider | orderBy:sortBy:reverse">
       <td ng-click="PHYSC.goToPhysician(item.physician_id)"><a>{{item.physician_profile_last_name}}, {{item.physician_profile_first_name}} {{item.physician_profile_middle_name}}</a></td>
       <td>{{item.physician_speciality}}</td>
     </tr>
