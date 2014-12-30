@@ -1,7 +1,7 @@
 (function() {
   "use strict";
-  PhysicianSearchController.$inject = [ "$scope", "$http", "$location" ];
-  function PhysicianSearchController($scope, $http, $location) {
+  PhysicianSearchController.$inject = [ "$http", "$location" ];
+  function PhysicianSearchController($http, $location) {
     this.specialityOptions1 = {
       "Allopathic & Osteopathic Physicians/ Family Medicine": "Family Practice",
       "Allopathic & Osteopathic Physicians/ Internal Medicine": "Internal Medicine",
