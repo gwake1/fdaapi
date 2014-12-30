@@ -1,9 +1,11 @@
-<h1>{{PHYSC.Physician.physician_profile_last_name}}, {{PHYSC.Physician.physician_profile_first_name}} {{PHYSC.Physician.physician_profile_middle_name}}</h1>
-<h2>{{PHYSC.Physician.physician_speciality}}</h2>
+<div ng-cloak>
+  <h1 class="ng-cloak">{{PHYSC.Physician.physician_profile_last_name}}, {{PHYSC.Physician.physician_profile_first_name}} {{PHYSC.Physician.physician_profile_middle_name}}</h1>
+  <h2 class="ng-cloak">{{PHYSC.Physician.physician_speciality}}</h2>
+</div>
 <div>
   <h3 ng-model="collapsed" ng-click="collapsed=!collapsed">Companies Submitting General Payment: {{PHYSC.phyGenPMTTotal | currency:"$":2}}</h3>
-  <table ng-show="collapsed">
-    <tr>
+  <table ng-cloak ng-show="collapsed">
+    <tr class="ng-cloak">
       <td class="GenPMTCo" ng-repeat="item in PHYSC.genPMTData | unique:'submitting_applicable_manufacturer_or_applicable_gpo_name'"
       ng-class="{RxCoBlue: hover}"
       ng-mouseenter="hover = true"
@@ -12,7 +14,7 @@
       {{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}
     </td>
   </tr>
-  <table ng-show="collapsed" class="table table-striped">
+  <table ng-cloak ng-show="collapsed" class="table table-striped">
     <tr>
       <th ng-click="sortBy='submitting_applicable_manufacturer_or_applicable_gpo_name'; reverse=!reverse">Company</th>
       <th ng-click="sortBy='name_of_associated_covered_drug_or_biological1'; reverse=!reverse">Associated Drug</th>
@@ -21,7 +23,7 @@
       <th ng-click="sortBy='total_amount_of_payment_usdollars'; reverse=!reverse">Value</th>
       <th ng-click="sortBy='date_of_payment'; reverse=!reverse">Date</th>
     </tr>
-    <tr ng-repeat="item in PHYSC.genPMTData | filter:PHYSC.filters | orderBy:predicate:reverse | orderBy:sortBy:reverse">
+    <tr class="ng-cloak" ng-repeat="item in PHYSC.genPMTData | filter:PHYSC.filters | orderBy:predicate:reverse | orderBy:sortBy:reverse">
       <td>{{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
       <td><a href="/#/rxsearch/{{item.ndc_of_associated_covered_drug_or_biological1}}">{{item.name_of_associated_covered_drug_or_biological1}}</a></td>
       <td>{{item.name_of_associated_covered_device_or_medical_supply1}}</td>
