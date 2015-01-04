@@ -21,7 +21,7 @@
       controller: "RxSearchController",
       controllerAs: "RxSC"
     })
-    .when("/rxsearch/:ndc_of_associated_covered_drug_or_biological1", {
+    .when("/rxsearch/:name_of_associated_covered_drug_or_biological1", {
       templateUrl: "views/rxsearchNDC.html",
       controller: "RxSearchController",
       controllerAs: "RxSC"

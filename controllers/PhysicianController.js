@@ -1,7 +1,7 @@
 (function() {
   "use strict";
-  PhysicianController.$inject = [ "$scope", "$routeParams", "$http" ];
-  function PhysicianController( $scope, $routeParams, $http) {
+  PhysicianController.$inject = [ "$scope", "$routeParams", "$http", "$location" ];
+  function PhysicianController( $scope, $routeParams, $http, $location) {
     var a = this,
     physician_id = $routeParams.physician_id,
     url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?physician_id=";
@@ -42,6 +42,9 @@
       .error(function(err) {
         console.log(err)
       })
+    }
+    this.goToDrug = function(name_of_associated_covered_drug_or_biological1) {
+      $location.path("/rxsearch/" + name_of_associated_covered_drug_or_biological1)
     }
   }
   angular.module("myApp")

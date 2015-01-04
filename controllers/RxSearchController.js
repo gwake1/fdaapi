@@ -6,8 +6,8 @@
       base: 0,
       increment: 500
     };
-    var a = this;
-    var url = "https://ndcgw.firebaseio.com/data/",
+    var a = this,
+    url = "https://ndcgw.firebaseio.com/data/",
     ref = new Firebase("https://nadacpugw.firebaseio.com/");
     this.increment = function(increment, base) {
       var limit = this.limit;
@@ -16,8 +16,8 @@
       console.log(limit);
     }
     this.createAPI = function() {
-      var begin = this.limit.base;
-      var end = this.limit.increment;
+      var begin = this.limit.base,
+      end = this.limit.increment;
       $http.get(url)
       .success(function(data) {
         for ( var i = begin; i < end; i++ ) {
