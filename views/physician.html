@@ -25,7 +25,7 @@
     </tr>
     <tr class="ng-cloak" ng-repeat="item in PHYSC.genPMTData | filter:PHYSC.filters | orderBy:predicate:reverse | orderBy:sortBy:reverse">
       <td>{{item.submitting_applicable_manufacturer_or_applicable_gpo_name}}</td>
-      <td ng-click="PHYSC.goToDrug(item.name_of_associated_covered_drug_or_biological1)">{{item.name_of_associated_covered_drug_or_biological1}}</td>
+      <td ng-click="PHYSC.goToDrug(item.name_of_associated_covered_drug_or_biological1, item.applicable_manufacturer_or_applicable_gpo_making_payment_id)">{{item.name_of_associated_covered_drug_or_biological1}}</td>
       <td>{{item.name_of_associated_covered_device_or_medical_supply1}}</td>
       <td>{{item.nature_of_payment_or_transfer_of_value}}</td>
       <td>{{item.total_amount_of_payment_usdollars | currency:"$":2}}</td>

@@ -43,8 +43,8 @@
         console.log(err)
       })
     }
-    this.goToDrug = function(name_of_associated_covered_drug_or_biological1) {
-      $location.path("/rxsearch/" + name_of_associated_covered_drug_or_biological1)
+    this.goToDrug = function(name_of_associated_covered_drug_or_biological1, applicable_manufacturer_or_applicable_gpo_making_payment_name) {
+      $location.path("/rxsearch/" + applicable_manufacturer_or_applicable_gpo_making_payment_name + "/" + name_of_associated_covered_drug_or_biological1)
     }
   }
   angular.module("myApp")
