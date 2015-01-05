@@ -1,5 +1,5 @@
 
-<h1 ng-repeat="item in RxCo.RxCo | limitTo: 1">{{item. applicable_manufacturer_or_applicable_gpo_making_payment_name}}</h1>
+<h1 ng-repeat="item in RxCo.RxCo | limitTo: 1">{{item.applicable_manufacturer_or_applicable_gpo_making_payment_name}}</h1>
 <table>
   <tr>
     <td class="GenPMTCo" ng-repeat="item in RxCo.RxCo | unique:'ndc_of_associated_covered_drug_or_biological1'"   ng-class="{RxCoBlue: hover}"

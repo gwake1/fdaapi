@@ -5,10 +5,10 @@
     var a = this;
     RxFactory.getRx(function(data) {
       a.Rx = data;
-      a.phyGenTotalPMT(a.Rx);
+      a.rxGenTotalPMT(a.Rx);
       console.log(a.Rx)
     })
-    a.phyGenTotalPMT = function(phy) {
+    a.rxGenTotalPMT = function(phy) {
       var a = this;
       a.RxPMTTotal = 0;
       $(phy).each(function(index) {
