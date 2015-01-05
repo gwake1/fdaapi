@@ -1,1 +1,12 @@
-{{RxCo.RxCoPMTTotal}}
+
+{{RxCo.RxCoPMTTotal | currency:"$":2}}
+<table>
+  <tr>
+    <td ng-repeat="item in RxCo.RxCo | unique:'name_of_associated_covered_drug_or_biological1'"   ng-class="{RxCoBlue: hover}"
+    ng-mouseenter="hover = true"
+    ng-mouseleave="hover = false"
+    ng-click="RxCo.goToDrug(item.name_of_associated_covered_drug_or_biological1, item.applicable_manufacturer_or_applicable_gpo_making_payment_id)">
+      {{item.name_of_associated_covered_drug_or_biological1}}
+    </td>
+  </tr>
+</table>
