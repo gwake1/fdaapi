@@ -21,7 +21,11 @@
       controller: "RxSearchController",
       controllerAs: "RxSC"
     })
-    .when("/rxsearch/:applicable_manufacturer_or_applicable_gpo_making_payment_id/:name_of_associated_covered_drug_or_biological1", {
+    .when("/rxsearch/:applicable_manufacturer_or_applicable_gpo_making_payment_id", {
+      templateUrl: "views/rxco.html",
+      controller: "RxCompanyController",
+      controllerAs: "RxCo"
+    })  .when("/rxsearch/:applicable_manufacturer_or_applicable_gpo_making_payment_id/:name_of_associated_covered_drug_or_biological1", {
       templateUrl: "views/rxsearchNDC.html",
       controller: "RxController",
       controllerAs: "Rx"
