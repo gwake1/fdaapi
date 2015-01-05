@@ -1,7 +1,7 @@
 (function() {
   "use strict";
-  PhysicianSearchController.$inject = [ "$http", "$location" ];
-  function PhysicianSearchController($http, $location) {
+  PhysicianSearchController.$inject = [ "$http", "$location", "PHYSCConstants" ];
+  function PhysicianSearchController($http, $location, PHYSCConstants) {
     this.specialityOptions1 = {
       "Allopathic & Osteopathic Physicians/ Family Medicine": "Family Practice",
       "Allopathic & Osteopathic Physicians/ Internal Medicine": "Internal Medicine",
@@ -9,13 +9,12 @@
     }
     var a = this;
     this.searchPhysician = function() {
-      var url = "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
-      phyFirstName = this.phy.firstName ? "physician_profile_first_name=" + this.phy.firstName + "&" : "",
-      phyLastName = this.phy.lastName ? "physician_profile_last_name=" + this.phy.lastName + "&" : "",
-      phyCity = this.phy.city ? "physician_profile_city=" + this.phy.city + "&" : "",
-      phyState = this.phy.state ? "physician_profile_state=" + this.phy.state : "",
-      phySpeciality = this.phy.speciality ? "&physician_speciality=" + this.phy.speciality + "&" : "";
-      $http.get(url + phyFirstName + phyLastName + phyCity + phyState + phySpeciality)
+      var phyFirstName = this.phy.firstName ? PHYSCConstants.fName + this.phy.firstName + "&" : "",
+      phyLastName = this.phy.lastName ? PHYSCConstants.lName + this.phy.lastName + "&" : "",
+      phyCity = this.phy.city ? PHYSCConstants.city + this.phy.city + "&" : "",
+      phyState = this.phy.state ? PHYSCConstants.st + this.phy.state : "",
+      phySpeciality = this.phy.speciality ? PHYSCConstants.spec + this.phy.speciality + "&" : "";
+      $http.get(PHYSCConstants.openCMSUrl + phyFirstName + phyLastName + phyCity + phyState + phySpeciality)
       .success(function(data) {
         a.provider = data;
         console.log(a.provider)
