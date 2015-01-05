@@ -8,8 +8,8 @@
   angular.module("myApp")
   .constant("PHYSCConstants", {
     openCMSUrl: "https://openpaymentsdata.cms.gov/resource/physician-profile-data-2013.json?",
-    lName: "physician_profile_first_name=",
-    fName: "physician_profile_last_name=",
+    fName: "physician_profile_first_name=",
+    lName: "physician_profile_last_name=",
     city: "physician_profile_city=",
     st: "physician_profile_state=",
     spec: "&physician_speciality="

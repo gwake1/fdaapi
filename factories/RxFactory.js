@@ -1,7 +1,7 @@
 (function() {
   "use strict";
   angular.module("myApp")
-  .factory("RxSearchFactory", function($http, $location, $routeParams, RxSCConstants) {
+  .factory("RxFactory", function($http, $location, $routeParams, RxSCConstants) {
     function getRx(cb) {
       var pharmCompany = $routeParams.applicable_manufacturer_or_applicable_gpo_making_payment_id,
       drug = $routeParams.name_of_associated_covered_drug_or_biological1;
