@@ -11,7 +11,7 @@
     RxFactory.getRx(function(data) {
       a.Rx = data;
       a.rxGenTotalPMT(a.Rx);
-      a.validateRxCui(a.Rx[0]);
+      a.dehyphenateNDC(a.Rx[0]);
       console.log(a.Rx)
     })
     a.rxGenTotalPMT = function(phy) {
@@ -20,11 +20,15 @@
         a.RxPMTTotal = a.RxPMTTotal + Number(phy[index].total_amount_of_payment_usdollars, 2);
       })
     }
+    a.dehyphenateNDC = function(ref) {
+      a.NDC = ref.ndc_of_associated_covered_drug_or_biological1;
+      console.log(/[-._:]/.test(a.NDC));
+    }
     a.hyphenateNDC = function(ref, hyphen) {
       a.NDC = ref.ndc_of_associated_covered_drug_or_biological1;
       a.NDCArr = [];
       for ( var i = 0; i < 13; i++ ) {
-        if (i === hyphen.labeler || i === hyphen.labeler + hyphen.productrx + 1) {
+        if (i === hyphen.labeler || i === (hyphen.labeler + hyphen.productrx + 1)) {
           a.NDCArr.push("-")
         } else if (i < hyphen.labeler) {
           a.NDCArr.push(String(a.NDC.charAt(i)));
@@ -54,8 +58,11 @@
           package: 2
         }
       ];
-      for (var i = 0; i < 3; i++ ) {
+      for (var i = 0; i < 3; i++) {
         a.getRxCui(ref, hyphen[i]);
+        if (a.rxNorm !== "undefined") {
+          break;
+        }
       }
     }
     a.getRxCui = function(ref, hyphen) {
