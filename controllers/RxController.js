@@ -89,8 +89,10 @@ a.getRxCui = function(ref) {
   $http.get(url + ref)
   .success(function(data) {
     a.rxNorm = data.idGroup.rxnormId;
-    if (a.rxNorm !== "undefined") {
-      console.log(a.rxNorm)
+    if (typeof a.rxNorm === "undefined") {
+      console.log("no result")
+    } else if (typeof a.rxNorm === "object") {
+      console.log(a.rxNorm);
       return a.rxNorm;
     }
   })
