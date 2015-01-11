@@ -8,7 +8,7 @@
       a.Rx = data;
       a.rxGenTotalPMT(a.Rx);
       a.validateRxCui(a.Rx[0]);
-      console.log(a.Rx)
+      console.log(a.Rx);
     })
     a.rxGenTotalPMT = function(phy) {
       a.RxPMTTotal = 0;
@@ -52,6 +52,7 @@
       a.getRxCui(ref);
     }
     a.validateRxCui = function(ref) {
+      var drugName = ref.name_of_associated_covered_drug_or_biological1;
       ref = ref.ndc_of_associated_covered_drug_or_biological1;
       a.hyphen = [
     {
@@ -73,7 +74,16 @@
 for (var i = 0; i < 3; i++) {
   a.dehyphenateNDC(ref);
   a.hyphenateNDC(a.dehyphenatedNDC, a.hyphen[i]);
-
+  if (i === 2 && typeof a.rxNorm === "undefined") {
+    var url =  "http://rxnav.nlm.nih.gov/REST/rxcui.json?name=";
+    $http.get(url + drugName)
+    .success(function(data){
+      console.log(data.idGroup.rxnormId[0]);
+    })
+    .error(function(err){
+      console.log(err);
+    })
+  }
 }
 // for (var i = 0; i < 3; i++) {
 //   a.getRxCui(ref, hyphen[i]);
@@ -92,6 +102,14 @@ a.getRxCui = function(ref) {
     if (typeof a.rxNorm === "undefined") {
       console.log("no result")
     } else if (typeof a.rxNorm === "object") {
+      var url = "http://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui="
+      $http.get(url + a.rxNorm)
+      .success(function(data) {
+        console.log(data);
+      })
+      .error(function(err) {
+        console.log(err);
+      })
       console.log(a.rxNorm);
       return a.rxNorm;
     }
@@ -113,6 +131,8 @@ a.preRxCui = function(ref) {
   .error(function(err) {
     console.log(err);
   })
+  a.getRxClass = function(ref) {
+  }
 }
 }
 angular.module("myApp")
