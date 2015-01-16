@@ -74,11 +74,11 @@
 for (var i = 0; i < 3; i++) {
   a.dehyphenateNDC(ref);
   a.hyphenateNDC(a.dehyphenatedNDC, a.hyphen[i]);
-  if (i === 2 && typeof a.rxNorm === "undefined") {
+  if (i == 2 && typeof a.rxNorm === "undefined") {
     var url =  "http://rxnav.nlm.nih.gov/REST/rxcui.json?name=";
     $http.get(url + drugName)
     .success(function(data){
-      console.log(data.idGroup.rxnormId[0]);
+      console.log("name search returned: " + data.idGroup.rxnormId[0]);
     })
     .error(function(err){
       console.log(err);
