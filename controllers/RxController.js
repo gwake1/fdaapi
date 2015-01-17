@@ -7,8 +7,12 @@
     RxFactory.getRx(function(data) {
       a.Rx = data;
       a.rxGenTotalPMT(a.Rx);
-      a.validateRxCui(a.Rx[0]);
+      // a.validateRxCui(a.Rx[0]);
+      a.p1.then(a.activeIngredients());
       console.log(a.Rx);
+    })
+    a.p1 = new Promise(function(resolve, reject){
+      resolve(a.validateRxCui(a.Rx[0]))
     })
     a.rxGenTotalPMT = function(phy) {
       a.RxPMTTotal = 0;
@@ -79,6 +83,17 @@ for (var i = 0; i < 4; i++) {
     a.rxCuiNameSearch(ref, drugName);
   }
 }
+}
+a.activeIngredients = function(){
+  var url = "http://rxnav.nlm.nih.gov/REST/rxcui/" + a.rxNorm + "/related.json?rela=tradename_of+has_precise_ingredient";
+  $http.get(url)
+  .success(function(data){
+    console.log("active ingredients results");
+    console.log(data);
+  })
+  .error(function(err){
+    console.log(err);
+  })
 }
 a.rxCuiNameSearch = function(ref, drugName) {
   var url =  "http://rxnav.nlm.nih.gov/REST/rxcui.json?name=";
