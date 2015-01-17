@@ -71,26 +71,26 @@
   package: 2
 }
 ];
-for (var i = 0; i < 3; i++) {
-  a.dehyphenateNDC(ref);
-  a.hyphenateNDC(a.dehyphenatedNDC, a.hyphen[i]);
-  if (i == 2 && typeof a.rxNorm === "undefined") {
-    var url =  "http://rxnav.nlm.nih.gov/REST/rxcui.json?name=";
-    $http.get(url + drugName)
-    .success(function(data){
-      console.log("name search returned: " + data.idGroup.rxnormId[0]);
-    })
-    .error(function(err){
-      console.log(err);
-    })
+for (var i = 0; i < 4; i++) {
+  if(i < 3){
+    a.dehyphenateNDC(ref);
+    a.hyphenateNDC(a.dehyphenatedNDC, a.hyphen[i]);
+  } else if (i == 3 && typeof a.rxNorm === "undefined") {
+    a.rxCuiNameSearch(ref, drugName);
   }
 }
-// for (var i = 0; i < 3; i++) {
-//   a.getRxCui(ref, hyphen[i]);
-//   if (a.rxNorm !== "undefined") {
-//     break;
-//   }
-// }
+}
+a.rxCuiNameSearch = function(ref, drugName) {
+  var url =  "http://rxnav.nlm.nih.gov/REST/rxcui.json?name=";
+  $http.get(url + drugName)
+  .success(function(data) {
+    a.rxNorm = data.idGroup.rxnormId[0]
+    console.log("name search returned: " + a.rxNorm);
+    return a.rxNorm
+  })
+  .error(function(err) {
+    console.log(err);
+  })
 }
 a.getRxCui = function(ref) {
   console.log(ref);
