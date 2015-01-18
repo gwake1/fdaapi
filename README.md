@@ -15,3 +15,5 @@
   + Distinct translations for all of the drug classes to laymen terms
 
 <h1>The Journey for Data Is Almost Complete Young Padawan!</h1>
+
+Adverse effects for drug url: https://api.fda.gov/drug/event.json?api_key=Xgd5lx8BAGRQThoeLjBRWRApQZxr6o9Qh87R3rbU&search=patient.drug.openfda.brand_name:%22symbicort%22&count=patient.reaction.reactionmeddrapt.exact
