@@ -7,3 +7,13 @@ Cost of Drug Info
 <br>
 Info on Adverse Effects
 <br>
+<table class="table table-striped">
+  <tr>
+    <th>tty</th>
+  </tr>
+  <tr ng-repeat="item in Rx.ingredients">
+    <td>{{item.tty}}</td>
+    <td ng-repeat="data in item.conceptProperties">
+      {{data.name}}
+  </tr>
+</table>

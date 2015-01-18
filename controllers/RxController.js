@@ -6,6 +6,7 @@
     a.rxNorm;
     a.rxNormName
     a.rxCui;
+    a.ingredients;
     RxFactory.getRx(function(data) {
       a.Rx = data;
       a.rxGenTotalPMT(a.Rx);
@@ -108,9 +109,9 @@ a.activeIngredients = function(ref) {
     $http.get(url)
     .success(function(data){
       console.log("active ingredients results");
-      var ingredients = data.relatedGroup.conceptGroup;
-      console.log(ingredients);
-      a.rxDrugClasses(ingredients)
+      a.ingredients = data.relatedGroup.conceptGroup;
+      console.log(a.ingredients);
+      a.rxDrugClasses(a.ingredients)
     })
     .error(function(err){
       console.log(err);
