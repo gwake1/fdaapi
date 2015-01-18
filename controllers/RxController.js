@@ -4,6 +4,7 @@
   function RxController($http, $routeParams, RxFactory) {
     var a = this;
     a.rxNorm;
+    a.rxNormName
     a.rxCui;
     RxFactory.getRx(function(data) {
       a.Rx = data;
@@ -78,27 +79,48 @@
 ];
 for (var i = 0; i < 4; i++) {
   if (i < 3) {
-    if (typeof a.rxNorm !== "number") {
+    if (typeof a.rxNorm !== "string") {
       a.dehyphenateNDC(ndc);
       a.hyphenateNDC(a.dehyphenatedNDC, a.hyphen[i]);
-    } else if (typeof a.rxNorm == "number") {
+    } else if (typeof a.rxNorm == "string") {
       console.log("NDC to RXCUI");
     }
-  } else if (i === 3 && typeof a.rxNorm !== "number") {
+  } else if (i === 3 && typeof a.rxNorm !== "string") {
     a.rxCuiNameSearch(ref, drugName);
   }
 }
 }
 a.activeIngredients = function(ref) {
   var url = "http://rxnav.nlm.nih.gov/REST/rxcui/" + ref + "/related.json?rela=tradename_of+has_precise_ingredient";
-  $http.get(url)
-  .success(function(data){
-    console.log("active ingredients results");
-    console.log(data);
-  })
-  .error(function(err){
-    console.log(err);
-  })
+  if(typeof ref == "undefined"){
+    ref = a.rxNormName;
+    $http.get(url)
+    .success(function(data){
+      console.log("active ingredients results");
+      var ingredients = data.relatedGroup.conceptGroup;
+      console.log(ingredients);
+      a.rxDrugClasses(ingredients)
+    })
+    .error(function(err){
+      console.log(err);
+    })
+  } else {
+    $http.get(url)
+    .success(function(data){
+      console.log("active ingredients results");
+      var ingredients = data.relatedGroup.conceptGroup;
+      console.log(ingredients);
+      a.rxDrugClasses(ingredients)
+    })
+    .error(function(err){
+      console.log(err);
+    })
+  }
+}
+a.rxDrugClasses = function (ref) {
+  for (var i = 0; i < ref.length; i++) {
+    console.log(ref[i].tty)
+  }
 }
 a.rxCuiNameSearch = function(ref, drugName) {
   var url =  "http://rxnav.nlm.nih.gov/REST/rxcui.json?name=";
@@ -106,7 +128,7 @@ a.rxCuiNameSearch = function(ref, drugName) {
   .success(function(data) {
     a.rxNorm = data.idGroup.rxnormId[0]
     console.log("name search returned: " + a.rxNorm);
-    return a.rxNorm
+    a.activeIngredients(a.rxNorm);
   })
   .error(function(err) {
     console.log(err);
@@ -120,9 +142,9 @@ a.getRxCui = function(ref) {
   .success(function(data) {
     a.rxNorm = data.idGroup.rxnormId;
     if (typeof a.rxNorm === "undefined") {
-      console.log("no result for " + ref)
+      console.log("no result for " + ref + " " + typeof a.rxNorm)
     } else {
-      console.log(a.rxNorm);
+      console.log(a.rxNorm + typeof a.rxNorm);
       a.activeIngredients(a.rxNorm);
     }
   })
