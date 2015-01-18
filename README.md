@@ -17,3 +17,7 @@
 <h1>The Journey for Data Is Almost Complete Young Padawan!</h1>
 
 Adverse effects for drug url: https://api.fda.gov/drug/event.json?api_key=Xgd5lx8BAGRQThoeLjBRWRApQZxr6o9Qh87R3rbU&search=patient.drug.openfda.brand_name:%22symbicort%22&count=patient.reaction.reactionmeddrapt.exact
+
+NEXT STEPS:
+Look up drug class and display drug class along with drugs in class
+complete table with similair drugs and spending and advese effects graph

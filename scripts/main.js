@@ -30,6 +30,10 @@
       controller: "RxController",
       controllerAs: "Rx"
     })
+    .when("/chart", {
+      templateUrl: "views/chart.html",
+      controller: "chart"
+    })
     .otherwise({ redirectTo: "/" });
   })
 }());
