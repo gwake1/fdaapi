@@ -4,14 +4,13 @@
   function RxController($http, $routeParams, RxFactory) {
     var a = this;
     a.rxNorm;
+    a.rxCui;
     RxFactory.getRx(function(data) {
       a.Rx = data;
       a.rxGenTotalPMT(a.Rx);
-      // a.validateRxCui(a.Rx[0]);
-      a.p1.then(a.activeIngredients());
-      console.log(a.Rx);
+      a.validateRxCui(a.Rx[0]);
     })
-    a.p1 = new Promise(function(resolve, reject){
+    a.p1 = new Promise(function(resolve, reject) {
       resolve(a.validateRxCui(a.Rx[0]))
     })
     a.rxGenTotalPMT = function(phy) {
@@ -21,10 +20,14 @@
       })
     }
     a.dehyphenateNDC = function(ref) {
-      var hyphenated = ref,
-      ref = hyphenated.split("-").join("");
-      a.dehyphenatedNDC = ref;
-      return a.dehyphenatedNDC;
+      if (typeof ref == "undefined"){
+        console.log("error: create alert function to perform search on this drug using rxclass autosuggestions")
+      } else {
+        var hyphenated = String(ref)
+        console.log(hyphenated + " " + ref);
+        a.dehyphenatedNDC = hyphenated.split("-").join("");
+        return a.dehyphenatedNDC;
+      }
     }
     a.hyphenTester = function(ref) {
       if (!/[-._:]/.test(ref)) {
@@ -36,8 +39,6 @@
       }
     }
     a.hyphenateNDC = function(ref, hyphen) {
-      console.log(ref);
-      // a.NDC = a.dehyphenateNDC(ref);
       a.NDC = ref;
       a.NDCArr = [];
       for ( var i = 0; i < 12; i++ ) {
@@ -56,8 +57,8 @@
       a.getRxCui(ref);
     }
     a.validateRxCui = function(ref) {
-      var drugName = ref.name_of_associated_covered_drug_or_biological1;
-      ref = ref.ndc_of_associated_covered_drug_or_biological1;
+      var drugName = ref.name_of_associated_covered_drug_or_biological1,
+      ndc = ref.ndc_of_associated_covered_drug_or_biological1;
       a.hyphen = [
     {
       labeler: 4,
@@ -76,16 +77,20 @@
 }
 ];
 for (var i = 0; i < 4; i++) {
-  if(i < 3){
-    a.dehyphenateNDC(ref);
-    a.hyphenateNDC(a.dehyphenatedNDC, a.hyphen[i]);
-  } else if (i == 3 && typeof a.rxNorm === "undefined") {
+  if (i < 3) {
+    if (typeof a.rxNorm !== "number") {
+      a.dehyphenateNDC(ndc);
+      a.hyphenateNDC(a.dehyphenatedNDC, a.hyphen[i]);
+    } else if (typeof a.rxNorm == "number") {
+      console.log("NDC to RXCUI");
+    }
+  } else if (i === 3 && typeof a.rxNorm !== "number") {
     a.rxCuiNameSearch(ref, drugName);
   }
 }
 }
-a.activeIngredients = function(){
-  var url = "http://rxnav.nlm.nih.gov/REST/rxcui/" + a.rxNorm + "/related.json?rela=tradename_of+has_precise_ingredient";
+a.activeIngredients = function(ref) {
+  var url = "http://rxnav.nlm.nih.gov/REST/rxcui/" + ref + "/related.json?rela=tradename_of+has_precise_ingredient";
   $http.get(url)
   .success(function(data){
     console.log("active ingredients results");
@@ -115,18 +120,10 @@ a.getRxCui = function(ref) {
   .success(function(data) {
     a.rxNorm = data.idGroup.rxnormId;
     if (typeof a.rxNorm === "undefined") {
-      console.log("no result")
-    } else if (typeof a.rxNorm === "object") {
-      var url = "http://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui="
-      $http.get(url + a.rxNorm)
-      .success(function(data) {
-        console.log(data);
-      })
-      .error(function(err) {
-        console.log(err);
-      })
+      console.log("no result for " + ref)
+    } else {
       console.log(a.rxNorm);
-      return a.rxNorm;
+      a.activeIngredients(a.rxNorm);
     }
   })
   .error(function(err) {
