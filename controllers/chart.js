@@ -3,7 +3,7 @@
   function chart ($http) {
     var
     effectsName = [],
-    effectsKeys = [],
+    effectsCount = [],
     url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:%22symbicort%22&count=patient.reaction.reactionmeddrapt.exact";
     $http.get(url)
     .success(function(data) {
@@ -17,58 +17,38 @@
     });
     var processEffects = function(effect, iterate, limit) {
       if (iterate == 0) {
-        effectsName["name"] = "drug";
-        effectsName[effect.term] = effect.count;
-        effectsKeys.push(effect.term);
+        effectsName.push(effect.term);
+        effectsCount.push("data1", effect.count);
       } else if (iterate === limit) {
         console.log(effectsName);
-        console.log(effectsKeys);
+        console.log(effectsCount);
         var chart = c3.generate({
           data: {
-            json: [effectsName]
-            ,
-            keys: {
-              x: 'name', // it's possible to specify 'x' when category axis
-              value: effectsKeys,
-            }
+            // xs: {
+            //   "data1": "x1",
+            // },
+            columns: [
+            effectsCount
+            ]
+          },
+          zoom: {
+            enabled: true
           },
           axis: {
             x: {
-              type: 'category'
+              type: "category",
+              categories: effectsName,
+              tick: {
+                rotate: 75,
+                multiline: false
+              },
+              height: 130
             }
           }
-        });
-
-
-        // var chart = c3.generate({
-        //   data: {
-        //     // xs: {
-        //     //   "data1": "x1",
-        //     // },
-        //     x: "x",
-        //     columns: [
-        //     effectsName,
-        //     effectsCount
-        //     ],
-        //     type: "line"
-        //   },
-        //   zoom: {
-        //     enabled: true
-        //   },
-        //   axis: {
-        //     x: {
-        //       type: 'category',
-        //       tick: {
-        //         rotate: 75,
-        //         multiline: false
-        //       },
-        //       height: 130
-        //     }
-        //   }
-        // })
+        })
       } else {
-        effectsName[effect.term] = effect.count;
-        effectsKeys.push(effect.term);
+        effectsName.push(effect.term);
+        effectsCount.push(effect.count);
       }
     }
     //function() {
