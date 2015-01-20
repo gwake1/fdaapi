@@ -97,9 +97,9 @@ a.activeIngredients = function(ref) {
     ref = a.rxNormName;
     $http.get(url)
     .success(function(data){
-      console.log("active ingredients results");
+      // console.log("active ingredients results");
       var ingredients = data.relatedGroup.conceptGroup;
-      console.log(ingredients);
+      // console.log(ingredients);
       a.rxDrugClasses(ingredients)
     })
     .error(function(err){
@@ -110,7 +110,7 @@ a.activeIngredients = function(ref) {
     .success(function(data){
       console.log("active ingredients results");
       a.ingredients = data.relatedGroup.conceptGroup;
-      console.log(a.ingredients);
+      // console.log(a.ingredients);
       a.rxDrugClasses(a.ingredients)
     })
     .error(function(err){
@@ -119,8 +119,12 @@ a.activeIngredients = function(ref) {
   }
 }
 a.rxDrugClasses = function (ref) {
-  for (var i = 0; i < ref.length; i++) {
-    console.log(ref[i].tty)
+  var url = "http://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui=",
+  ingredients = ref[0].conceptProperties,
+  ingredientsArray = [];
+  for (var i = 0; i < ingredients.length; i++) {
+  ingredientsArray.push(ingredients[i].rxcui);
+  console.log(ingredientsArray);
   }
 }
 a.rxCuiNameSearch = function(ref, drugName) {
