@@ -92,7 +92,7 @@ for (var i = 0; i < 4; i++) {
 }
 }
 a.activeIngredients = function(ref) {
-  var url = "http://rxnav.nlm.nih.gov/REST/rxcui/" + ref + "/related.json?rela=tradename_of+has_precise_ingredient";
+  var url = "http://rxnav.nlm.nih.gov/REST/rxcui/" + ref + "/related.json?rela=tradename_of";
   if(typeof ref == "undefined"){
     ref = a.rxNormName;
     $http.get(url)
