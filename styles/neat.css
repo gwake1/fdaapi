@@ -196,6 +196,21 @@ picture {
   margin: 0;
   max-width: 100%; }
 
+div form.PhysicianSearchForm {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%; }
+  div form.PhysicianSearchForm:last-child {
+    margin-right: 0; }
+  div form.PhysicianSearchForm div {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%; }
+    div form.PhysicianSearchForm div:last-child {
+      margin-right: 0; }
+
 header.navigation {
   background-color: #333;
   border-bottom: 1px solid #1a1a1a;
@@ -529,85 +544,6 @@ header.navigation {
     overflow: hidden; }
   header.navigation .modal-closed {
     overflow: auto; }
-  header.navigation .search-bar {
-    float: left;
-    padding: 0.85em 0.6em 0.7em 0.6em;
-    width: 60%; }
-    header.navigation .search-bar form {
-      position: relative; }
-      header.navigation .search-bar form input[type=search] {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        background: #404040;
-        border-radius: 6px;
-        border: 1px solid #262626;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 0.9em;
-        font-style: italic;
-        margin: 0;
-        padding: 0.5em 0.8em;
-        width: 100%; }
-        @media screen and (min-width: 53.75em) {
-          header.navigation .search-bar form input[type=search] {
-            width: 100%; } }
-      header.navigation .search-bar form button[type=submit] {
-        background-color: #404040;
-        border-radius: 3px;
-        border: none;
-        color: white;
-        display: inline-block;
-        font-size: inherit;
-        font-weight: bold;
-        padding: 7px 18px;
-        text-decoration: none;
-        background-clip: padding-box;
-        background-color: #404040;
-        border-radius: 3px;
-        border: none;
-        color: white;
-        display: inline-block;
-        font-size: inherit;
-        font-weight: bold;
-        padding: 7px 18px;
-        text-decoration: none;
-        background-clip: padding-box;
-        bottom: 0.3em;
-        left: auto;
-        outline: none;
-        padding: 0 9px;
-        position: absolute;
-        right: 0.3em;
-        top: 0.3em; }
-        header.navigation .search-bar form button[type=submit]:hover:not(:disabled) {
-          background-color: #4d4d4d;
-          cursor: pointer; }
-        header.navigation .search-bar form button[type=submit]:active:not(:disabled), header.navigation .search-bar form button[type=submit]:focus:not(:disabled) {
-          background-color: #333333;
-          cursor: pointer; }
-        header.navigation .search-bar form button[type=submit]:hover:not(:disabled) {
-          background-color: #504949;
-          cursor: pointer; }
-        header.navigation .search-bar form button[type=submit]:active:not(:disabled), header.navigation .search-bar form button[type=submit]:focus:not(:disabled) {
-          background-color: #333333;
-          cursor: pointer; }
-        header.navigation .search-bar form button[type=submit]:disabled {
-          opacity: 0.5;
-          cursor: not-allowed; }
-        header.navigation .search-bar form button[type=submit] img {
-          height: 12px;
-          opacity: 0.7;
-          padding: 1px; }
-    @media screen and (min-width: 53.75em) {
-      header.navigation .search-bar {
-        display: inline-block;
-        position: relative;
-        width: 16em; }
-        header.navigation .search-bar input {
-          -webkit-box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          box-sizing: border-box;
-          display: block; } }
 
 .hero {
   background: url("assets/Red_and_blue_pill.jpg"), -webkit-linear-gradient(10deg, #20392B, #7F99BE), no-repeat #7F99BE scroll;
