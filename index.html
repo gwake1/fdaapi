@@ -20,42 +20,70 @@
   </div>
 
   <header class="navigation" role="banner">
-  <div class="navigation-wrapper">
-    <a href="javascript:void(0)" class="logo">
-      <i class="fa fa-medkit fa-6"></i>
-    </a>
-    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
-    <nav role="navigation">
-      <ul id="js-navigation-menu" class="navigation-menu show">
-        <li class="nav-link"><a href="javascript:void(0)">Products</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
-        <li class="nav-link more"><a href="javascript:void(0)">More</a>
-          <ul class="submenu">
-            <li><a href="javascript:void(0)">Submenu Item</a></li>
-            <li><a href="javascript:void(0)">Another Item</a></li>
-            <li class="more"><a href="javascript:void(0)">Item with submenu</a>
-              <ul class="submenu">
-                <li><a href="javascript:void(0)">Sub-submenu Item</a></li>
-                <li><a href="javascript:void(0)">Another Item</a></li>
-              </ul>
-            </li>
-            <li class="more"><a href="javascript:void(0)">Another submenu</a>
-              <ul class="submenu">
-                <li><a href="javascript:void(0)">Sub-submenu</a></li>
-                <li><a href="javascript:void(0)">An Item</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-    <div class="navigation-tools">
-      <a href="" class="log-in">Log In</a>
-      <a href="javascript:void(0)" class="sign-up">Sign Up</a>
+    <div class="navigation-wrapper">
+      <a href="javascript:void(0)" class="logo">
+        <i class="fa fa-medkit fa-6"></i>
+      </a>
+      <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+      <nav role="navigation">
+        <ul id="js-navigation-menu" class="navigation-menu show">
+          <li class="nav-link"><a href="javascript:void(0)">Products</a></li>
+          <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
+          <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
+          <li class="nav-link more"><a href="javascript:void(0)">More</a>
+            <ul class="submenu">
+              <li><a href="javascript:void(0)">Submenu Item</a></li>
+              <li><a href="javascript:void(0)">Another Item</a></li>
+              <li class="more"><a href="javascript:void(0)">Item with submenu</a>
+                <ul class="submenu">
+                  <li><a href="javascript:void(0)">Sub-submenu Item</a></li>
+                  <li><a href="javascript:void(0)">Another Item</a></li>
+                </ul>
+              </li>
+              <li class="more"><a href="javascript:void(0)">Another submenu</a>
+                <ul class="submenu">
+                  <li><a href="javascript:void(0)">Sub-submenu</a></li>
+                  <li><a href="javascript:void(0)">An Item</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="navigation-tools">
+        <div class="modal">
+          <label for="modal-2">
+            <div class="modal-trigger">Sign Up</div>
+          </label>
+          <input class="modal-state" id="modal-2" type="checkbox" />
+          <div class="modal-window">
+            <div class="modal-inner">
+              <label class="modal-close" for="modal-2"></label>
+              <h1>Sign Up</h1>
+              <p class="modal-intro">Provide your e-mail address and a password to register for Doctor in The Lobby.</p>
+              <p class="modal-content">
+                <form action=""></form>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal">
+          <label for="modal-1">
+            <div class="modal-trigger">Log In</div>
+          </label>
+          <input class="modal-state" id="modal-1" type="checkbox" />
+          <div class="modal-window">
+            <div class="modal-inner">
+              <label class="modal-close" for="modal-1"></label>
+              <h1>Modal Title</h1>
+              <p class="modal-intro">Intro text lorem ipsum dolor sit ametm, quas, eaque facilis aliquid cupiditate tempora cumque ipsum accusantium illo modi commodi  minima.</p>
+              <p class="modal-content">Body text lorem ipsum dolor ipsum dolor sit sit possimus amet, consectetur adipisicing elit. Itaque, placeat, explicabo, veniam quos aperiam molestias eriam molestias molestiae suscipit ipsum enim quasi sit possimus quod atque nobis voluptas earum odit accusamus quibusdam. Body text lorem ipsum dolor ipsum dolor sit sit possimus amet.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
 
   <div ng-view></div>

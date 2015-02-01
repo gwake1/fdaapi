@@ -380,59 +380,155 @@ header.navigation {
         background: transparent;
         clear: none;
         float: right; } }
-  header.navigation .sign-up {
-    background-color: #477DCA;
-    border-radius: 3px;
-    border: none;
-    color: white;
-    display: inline-block;
-    font-size: inherit;
-    font-weight: bold;
-    padding: 7px 18px;
-    text-decoration: none;
-    background-clip: padding-box;
-    display: inline;
-    float: right;
-    font-size: 0.8em;
+  header.navigation .modal {
     margin-top: 1em;
-    padding: 0.75em 1em;
-    text-transform: uppercase; }
-    header.navigation .sign-up:hover:not(:disabled) {
-      background-color: #578ad4;
+    /*   height: \$navigation-height;
+    padding-left: \$navigation-padding / 2;
+    padding-right: \$navigation-padding; */ }
+    header.navigation .modal h1 {
+      margin: 0; }
+    header.navigation .modal p {
+      color: #333;
+      line-height: 1.5; }
+    header.navigation .modal label {
+      cursor: pointer;
+      margin-bottom: 0; }
+    header.navigation .modal label img {
+      border-radius: 150px;
+      display: block;
+      max-width: 300px; }
+    header.navigation .modal .modal-state {
+      display: none; }
+    header.navigation .modal .modal-trigger {
+      background-color: #477DCA;
+      border-radius: 3px;
+      border: none;
+      color: white;
+      display: inline-block;
+      font-size: inherit;
+      font-weight: bold;
+      padding: 7px 18px;
+      text-decoration: none;
+      background-clip: padding-box;
+      /* padding: 0.8em 1em; */ }
+      header.navigation .modal .modal-trigger:hover:not(:disabled) {
+        background-color: #578ad4;
+        cursor: pointer; }
+      header.navigation .modal .modal-trigger:active:not(:disabled), header.navigation .modal .modal-trigger:focus:not(:disabled) {
+        background-color: #3c71bb;
+        cursor: pointer; }
+      header.navigation .modal .modal-trigger:disabled {
+        opacity: 0.5;
+        cursor: not-allowed; }
+    header.navigation .modal .modal-window {
+      -webkit-transition: opacity 0.25s ease;
+      -moz-transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease;
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      background: rgba(0, 0, 0, 0.85);
+      opacity: 0;
+      padding-top: 0.6em;
+      text-align: left;
+      visibility: hidden;
+      z-index: 99999999999; }
+      @media screen and (min-width: 53.75em) {
+        header.navigation .modal .modal-window {
+          padding-top: 0.75em 1em; } }
+      header.navigation .modal .modal-window .modal-bg {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        cursor: pointer; }
+    header.navigation .modal .modal-close {
+      position: absolute;
+      top: 1.5em;
+      right: 1.5em;
+      height: 1.5em;
+      width: 1.5em;
+      background: #fff;
       cursor: pointer; }
-    header.navigation .sign-up:active:not(:disabled), header.navigation .sign-up:focus:not(:disabled) {
-      background-color: #3c71bb;
-      cursor: pointer; }
-    header.navigation .sign-up:disabled {
-      opacity: 0.5;
-      cursor: not-allowed; }
-  header.navigation .log-in {
-    background-color: #477DCA;
-    border-radius: 3px;
-    border: none;
-    color: white;
-    display: inline-block;
-    font-size: inherit;
-    font-weight: bold;
-    padding: 7px 18px;
-    text-decoration: none;
-    background-clip: padding-box;
-    display: inline;
-    float: right;
-    font-size: 0.8em;
-    margin-top: 1em;
-    margin-left: 1em;
-    padding: 0.75em 1em;
-    text-transform: uppercase; }
-    header.navigation .log-in:hover:not(:disabled) {
-      background-color: #578ad4;
-      cursor: pointer; }
-    header.navigation .log-in:active:not(:disabled), header.navigation .log-in:focus:not(:disabled) {
-      background-color: #3c71bb;
-      cursor: pointer; }
-    header.navigation .log-in:disabled {
-      opacity: 0.5;
-      cursor: not-allowed; }
+      header.navigation .modal .modal-close:after, header.navigation .modal .modal-close:before {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        bottom: 0;
+        left: 50%;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        height: 1.5em;
+        width: 0.15em;
+        background: #ddd;
+        content: '';
+        display: block;
+        margin: -3px 0 0 -1px; }
+      header.navigation .modal .modal-close:hover:after, header.navigation .modal .modal-close:hover:before {
+        background: #c4c4c4; }
+      header.navigation .modal .modal-close:before {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg); }
+    header.navigation .modal .modal-inner {
+      -webkit-transition: opacity 0.25s ease;
+      -moz-transition: opacity 0.25s ease;
+      transition: opacity 0.25s ease;
+      background: #fff;
+      border-radius: 3px;
+      margin-top: 0;
+      margin: auto;
+      max-height: 95%;
+      overflow: auto;
+      padding: 1.5em;
+      position: relative;
+      width: 95%; }
+      @media screen and (min-width: 60px) {
+        header.navigation .modal .modal-inner {
+          max-height: 70%;
+          padding: 3em;
+          width: 60%; } }
+      @media screen and (min-width: 53.75em) {
+        header.navigation .modal .modal-inner {
+          width: 50%; } }
+      header.navigation .modal .modal-inner h1 {
+        color: #333;
+        margin-bottom: 0.6em;
+        text-align: left;
+        text-transform: capitalize; }
+      header.navigation .modal .modal-inner .modal-intro {
+        font-weight: 800; }
+      header.navigation .modal .modal-inner .modal-content {
+        color: #333; }
+        @media screen and (min-width: 60px) {
+          header.navigation .modal .modal-inner .modal-content {
+            -webkit-columns: 2 8em;
+            -moz-columns: 2 8em;
+            columns: 2 8em; } }
+      header.navigation .modal .modal-inner a.cta {
+        color: white;
+        display: inline-block;
+        margin-right: 0.5em;
+        margin-top: 1em; }
+        header.navigation .modal .modal-inner a.cta:last-child {
+          padding: 0 2em; }
+    header.navigation .modal .modal-state:checked + .modal-window {
+      opacity: 1;
+      visibility: visible; }
+    header.navigation .modal .modal-state:checked + .modal-window .modal-inner {
+      top: 0.5em; }
+  header.navigation .modal-open {
+    overflow: hidden; }
+  header.navigation .modal-closed {
+    overflow: auto; }
   header.navigation .search-bar {
     float: left;
     padding: 0.85em 0.6em 0.7em 0.6em;
@@ -514,8 +610,8 @@ header.navigation {
           display: block; } }
 
 .hero {
-  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png"), -webkit-linear-gradient(10deg, #20392B, #7F99BE), no-repeat #7F99BE scroll;
-  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png"), linear-gradient(10deg, #20392B, #7F99BE), no-repeat #7F99BE scroll;
+  background: url("assets/Red_and_blue_pill.jpg"), -webkit-linear-gradient(10deg, #20392B, #7F99BE), no-repeat #7F99BE scroll;
+  background: url("assets/Red_and_blue_pill.jpg"), linear-gradient(10deg, #20392B, #7F99BE), no-repeat #7F99BE scroll;
   background-color: #324766;
   background-position: top;
   background-repeat: no-repeat;
