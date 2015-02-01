@@ -38,6 +38,10 @@
       templateUrl: "views/promise.html",
       controller: "PromiseController"
     })
+    .when("/login", {
+      templateUrl: "views/login.html",
+      controller: "AuthController"
+    })
     .otherwise({ redirectTo: "/" });
   })
 }());
