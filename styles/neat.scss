@@ -496,7 +496,7 @@ header.navigation {
   .hero-inner {
     @include outer-container;
     @include clearfix;
-    color: $hero-color;
+    /* color: \$hero-color; */
     margin: auto;
     padding: 3.5em;
     text-align: center;
@@ -522,6 +522,9 @@ header.navigation {
           font-size: 1.1em;
           max-width: 40%;
         }
+      }
+      a {
+        color: white;
       }
     }
 
