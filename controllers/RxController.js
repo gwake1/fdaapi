@@ -4,7 +4,8 @@
   function RxController($http, $routeParams, RxFactory) {
     var a = this,
     effectsName = [],
-    effectsCount = [];
+    effectsCount = [],
+    tempTerm = new Array();
     a.rxNorm;
     a.rxNormName
     a.rxCui;
@@ -14,9 +15,9 @@
       a.rxGenTotalPMT(a.Rx);
       a.validateRxCui(a.Rx[0]);
     })
-    a.p1 = new Promise(function(resolve, reject) {
-      resolve(a.validateRxCui(a.Rx[0]))
-    })
+    // a.p1 = new Promise(function(resolve, reject) {
+    //   resolve(a.validateRxCui(a.Rx[0]))
+    // })
     a.rxGenTotalPMT = function(phy) {
       a.RxPMTTotal = 0;
       $(phy).each(function(index) {
@@ -202,9 +203,12 @@
     }
     a.processEffects = function(effect, iterate, limit) {
       if (iterate == 0) {
-        effectsName.push(effect.term);
+        tempTerm.push(new Array());
+        tempTerm[iterate].push(effect.term);
         effectsCount.push("data1", effect.count);
+        console.log(tempTerm);
       } else if (iterate === limit) {
+        effectsName.push(tempTerm[iterate])
         console.log(effectsName);
         console.log(effectsCount);
         var chart = c3.generate({
@@ -232,7 +236,7 @@
           }
         })
       } else {
-        effectsName.push(effect.term);
+        tempTerm.iterate.push(effect.term);
         effectsCount.push(effect.count);
       }
     }

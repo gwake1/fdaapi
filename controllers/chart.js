@@ -2,22 +2,23 @@
   // "use strict";
   chart.$inject = [ "$http", "$q" ];
   function chart($http, $q) {
-    var a = this,
-    gw = []
-    rxcui = [1191, 3521];
-    a.name = rxcui[0].toString() + "rx";
-    json = {};
-    $http.get("https://api.fda.gov/drug/event.json?search=patient.drug.openfda.rxcui." + rxcui[0] + "&count=patient.reaction.reactionmeddrapt.exact")
-    .success(function(data) {
-      rxcui[0] = new Array();
-      gw.push(rxcui[0]);
-      effects = data.results;
-      console.log(effects);
-      $.map(effects, function(n) {
-        var effectscount = n.count;
-        gw[0].push(effectscount);
-      })
-      console.log(gw);
+    var obj = {
+      "foo": 1,
+      "bar": 2
+    },
+    jeezy = [];
+    for (var key in obj) {
+      console.log(obj[key]);
+    }
+    var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:%22symbicort%22&count=patient.reaction.reactionmeddrapt.exact";
+    $http.get(url)
+    .success(function(data){
+      console.log(data);
+      var gw = data.results;
+      for(var key in gw){
+        jeezy.push(gw[key].term);
+      }
+      console.log(jeezy);
     })
   }
   angular.module("myApp")
