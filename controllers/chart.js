@@ -6,20 +6,45 @@
       "foo": 1,
       "bar": 2
     },
-    jeezy = [];
-    for (var key in obj) {
-      console.log(obj[key]);
-    }
-    var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:%22symbicort%22&count=patient.reaction.reactionmeddrapt.exact";
-    $http.get(url)
-    .success(function(data){
-      console.log(data);
-      var gw = data.results;
-      for(var key in gw){
-        jeezy.push(gw[key].term);
+    executeNames = ["Symbicort", "Aggrenox"],
+    uniqueNames = {},
+    jeezy = [],
+    jeezy2 = [];
+    var uniqueFilter = function(ref) {
+      var o = ref, i, l = ref.length, r = [];
+      for(i=0; i<l;i++) o[this[i]] = this[i];
+      for(i in o) r.push(o[i]);
+      return r;
+    };
+    // for (var key in obj) {
+    //   console.log(obj[key]);
+    // }
+    var populateData = function(ref){
+      var o = ref, i, l=ref.length, r = [];
+      for(i=0; i<l; i++)
+      {
+        drugName = ref[i].toString();
+        xIteration = "x"+i.toString();
+        var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:" + drugName + "&count=patient.reaction.reactionmeddrapt.exact";
+        $http.get(url)
+        .success(function(data) {
+          console.log(data);
+          jeezy.push(drugName);
+          jeezy2.push(xIteration);
+          var gw = data.results;
+          for (var key in gw) {
+            jeezy.push(gw[key].term);
+            jeezy2.push(gw[key].count);
+            uniqueNames[gw[key].term];
+            uniqueNames[gw[key].term] = gw[key].term;
+          }
+          console.log(jeezy);
+          console.log(jeezy2);
+          console.log(uniqueFilter(uniqueNames));
+        })
       }
-      console.log(jeezy);
-    })
+    }
+    populateData(executeNames);
   }
   angular.module("myApp")
   .controller("chart", chart)
