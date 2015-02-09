@@ -53,31 +53,40 @@
       var finalXAxis = uniqueFilter(uniqueNames);
       console.log(finalXAxis);
       for(drug in tempData){
+        tempData[drug].tempvalue = new Array();
+        for(var tick in tempData[drug].value){
+          var tempTerm, tempCount, tub = {};
+          tempTerm = tempData[drug].value[tick].term;
+          tempCount = tempData[drug].value[tick].count;
+          tub[tempTerm] = tempCount;
+          tempData[drug].tempvalue.push(tub);
+        }
         for(var symptom in finalXAxis){
           if (tempData[drug].term.indexOf(finalXAxis[symptom]) < 0) {
             var sub = {};
             sub[finalXAxis[symptom]] = 0;
-          tempData[drug].value.push(sub);
-        } else {
-          console.log("match");
+            tempData[drug].tempvalue.push(sub);
+          } else {
+            console.log("match");
+          }
         }
-        }
+        console.log(tempData);
       }
-      publishData();
+      // publishData();
     }
-    var publishData = function(){
-      var finalXAxis = uniqueFilter(uniqueNames);
-      for (var i = 0; i < executeNames.length; i++) {
-        var finalcount = new Array(),
-        finalDrug = executeNames[i];
-        finalcount.push(finalDrug);
-        for(var symptom in finalXAxis){
-          finalcount.push("jeezy");
-        }
-        columnsData[i] = (finalcount);
-      }
-      console.log(columnsData);
-    }
+    // var publishData = function(){
+    //   var finalXAxis = uniqueFilter(uniqueNames);
+    //   for (var i = 0; i < executeNames.length; i++) {
+    //     var finalcount = new Array(),
+    //     finalDrug = executeNames[i];
+    //     finalcount.push(finalDrug);
+    //     for(var symptom in finalXAxis){
+    //       finalcount.push("jeezy");
+    //     }
+    //     columnsData[i] = (finalcount);
+    //   }
+    //   console.log(columnsData);
+    // }
     populateData(executeNames);
   }
   angular.module("myApp")
