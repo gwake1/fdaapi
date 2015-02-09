@@ -31,7 +31,6 @@
           for (var key in gw) {
             uniqueNames[gw[key].term] = gw[key].term;
           }
-          console.log(uniqueFilter(uniqueNames));
           console.log(tempData);
           validation(tempData);
         })
@@ -39,12 +38,22 @@
     }
     var validation = function(ref){
       for (var drug in ref) {
-        var gb = "term " + drug.toString(),
         gb = new Array();
         for(var jk in ref[drug].value){
           gb.push(ref[drug].value[jk].term);
         }
         ref[drug]["term"] = gb;
+      }
+      finalizeData(tempData)
+    }
+    var finalizeData = function(ref){
+      var finalXAxis = uniqueFilter(uniqueNames);
+      console.log(finalXAxis);
+      for(drug in tempData){
+        console.log(tempData[drug]);
+        for(var symptom in finalXAxis){
+          console.log(tempData[drug].term.indexOf(finalXAxis[symptom]))
+        }
       }
     }
     populateData(executeNames);
