@@ -22,25 +22,29 @@
       for(i=0; i<l; i++)
       {
         drugName = ref[i].toString();
-        xIteration = "x"+i.toString();
-        jeezy.push(drugName);
-        jeezy2.push(xIteration);
         var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:" + drugName + "&count=patient.reaction.reactionmeddrapt.exact";
         $http.get(url)
         .success(function(data) {
           console.log(data);
           var gw = data.results;
-          tempData.push({ label: ref[i], value: gw })
+          tempData.push({ label: "label", value: gw})
           for (var key in gw) {
-            jeezy.push(gw[key].term);
-            jeezy2.push(gw[key].count);
             uniqueNames[gw[key].term] = gw[key].term;
           }
-          // console.log(jeezy);
-          // console.log(jeezy2);
           console.log(uniqueFilter(uniqueNames));
           console.log(tempData);
+          validation(tempData);
         })
+      }
+    }
+    var validation = function(ref){
+      for (var drug in ref) {
+        var gb = "term " + drug.toString(),
+        gb = new Array();
+        for(var jk in ref[drug].value){
+          gb.push(ref[drug].value[jk].term);
+        }
+        ref[drug]["term"] = gb;
       }
     }
     populateData(executeNames);
