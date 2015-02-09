@@ -8,8 +8,8 @@
     },
     executeNames = ["Symbicort", "Aggrenox"],
     uniqueNames = {},
-    tempData = {},
     jeezy = [],
+    tempData = [],
     jeezy2 = [];
     var uniqueFilter = function(ref) {
       var o = ref, i, l = ref.length, r = [];
@@ -30,14 +30,16 @@
         .success(function(data) {
           console.log(data);
           var gw = data.results;
+          tempData.push({ label: ref[i], value: gw })
           for (var key in gw) {
             jeezy.push(gw[key].term);
             jeezy2.push(gw[key].count);
             uniqueNames[gw[key].term] = gw[key].term;
           }
-          console.log(jeezy);
-          console.log(jeezy2);
+          // console.log(jeezy);
+          // console.log(jeezy2);
           console.log(uniqueFilter(uniqueNames));
+          console.log(tempData);
         })
       }
     }
