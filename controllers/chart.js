@@ -8,6 +8,7 @@
     },
     executeNames = ["Symbicort", "Aggrenox"],
     uniqueNames = {},
+    tempData = {},
     jeezy = [],
     jeezy2 = [];
     var uniqueFilter = function(ref) {
@@ -16,26 +17,22 @@
       for(i in o) r.push(o[i]);
       return r;
     };
-    // for (var key in obj) {
-    //   console.log(obj[key]);
-    // }
     var populateData = function(ref){
       var o = ref, i, l=ref.length, r = [];
       for(i=0; i<l; i++)
       {
         drugName = ref[i].toString();
         xIteration = "x"+i.toString();
+        jeezy.push(drugName);
+        jeezy2.push(xIteration);
         var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:" + drugName + "&count=patient.reaction.reactionmeddrapt.exact";
         $http.get(url)
         .success(function(data) {
           console.log(data);
-          jeezy.push(drugName);
-          jeezy2.push(xIteration);
           var gw = data.results;
           for (var key in gw) {
             jeezy.push(gw[key].term);
             jeezy2.push(gw[key].count);
-            uniqueNames[gw[key].term];
             uniqueNames[gw[key].term] = gw[key].term;
           }
           console.log(jeezy);
