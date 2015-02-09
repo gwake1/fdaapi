@@ -53,7 +53,9 @@
         console.log(tempData[drug]);
         for(var symptom in finalXAxis){
           if (tempData[drug].term.indexOf(finalXAxis[symptom]) < 0) {
-          console.log("add a zero to this particular drug class")
+            var sub = {};
+            sub[finalXAxis[symptom]] = 0;
+          tempData[drug].value.push(sub);
         } else {
           console.log("match");
         }
