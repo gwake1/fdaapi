@@ -7,12 +7,15 @@
       "bar": 2
     },
     columnsData = [],
-    executeNames = ["Symbicort", "Aggrenox"],
+    executeNames = ["Aggrenox", "Symbicort"],
     uniqueNames = {},
     finalcount = [],
+    drugName = [],
     jeezy = [],
     tempData = [],
+    finalXAxis = [],
     jeezy2 = [];
+    executeNames = executeNames.sort();
     // http://www.shamasis.net/2009/09/fast-algorithm-to-find-unique-items-in-javascript-array/
     var uniqueFilter = function(ref) {
       var o = ref, i, l = ref.length, r = [];
@@ -24,8 +27,8 @@
       var o = ref, i, l=ref.length, r = [];
       for(i=0; i<l; i++)
       {
-        drugName = ref[i].toString();
-        var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:" + drugName + "&count=patient.reaction.reactionmeddrapt.exact";
+        drugName.push(ref[i]);
+        var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:" + "\"" + drugName[i] + "\"" + "&count=patient.reaction.reactionmeddrapt.exact";
         $http.get(url)
         .success(function(data) {
           console.log(data);
@@ -40,17 +43,18 @@
       }
     }
     var validation = function(ref){
-      for (var drug in ref) {
+      for (var i = 0; i < ref.length; i++) {
+        tempData[i].label = executeNames[i];
         gb = new Array();
-        for(var jk in ref[drug].value){
-          gb.push(ref[drug].value[jk].term);
+        for(var jk in ref[i].value){
+          gb.push(ref[i].value[jk].term);
         }
-        ref[drug]["term"] = gb;
+        ref[i]["term"] = gb;
       }
       finalizeData(tempData)
     }
     var finalizeData = function(ref){
-      var finalXAxis = uniqueFilter(uniqueNames);
+      finalXAxis = uniqueFilter(uniqueNames);
       console.log(finalXAxis);
       for(drug in tempData){
         tempData[drug].tempvalue = new Array();
@@ -72,21 +76,7 @@
         }
         console.log(tempData);
       }
-      // publishData();
     }
-    // var publishData = function(){
-    //   var finalXAxis = uniqueFilter(uniqueNames);
-    //   for (var i = 0; i < executeNames.length; i++) {
-    //     var finalcount = new Array(),
-    //     finalDrug = executeNames[i];
-    //     finalcount.push(finalDrug);
-    //     for(var symptom in finalXAxis){
-    //       finalcount.push("jeezy");
-    //     }
-    //     columnsData[i] = (finalcount);
-    //   }
-    //   console.log(columnsData);
-    // }
     populateData(executeNames);
   }
   angular.module("myApp")
