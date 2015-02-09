@@ -6,11 +6,14 @@
       "foo": 1,
       "bar": 2
     },
+    columnsData = [],
     executeNames = ["Symbicort", "Aggrenox"],
     uniqueNames = {},
+    finalcount = [],
     jeezy = [],
     tempData = [],
     jeezy2 = [];
+    // http://www.shamasis.net/2009/09/fast-algorithm-to-find-unique-items-in-javascript-array/
     var uniqueFilter = function(ref) {
       var o = ref, i, l = ref.length, r = [];
       for(i=0; i<l;i++) o[this[i]] = this[i];
@@ -50,7 +53,6 @@
       var finalXAxis = uniqueFilter(uniqueNames);
       console.log(finalXAxis);
       for(drug in tempData){
-        console.log(tempData[drug]);
         for(var symptom in finalXAxis){
           if (tempData[drug].term.indexOf(finalXAxis[symptom]) < 0) {
             var sub = {};
@@ -61,6 +63,20 @@
         }
         }
       }
+      publishData();
+    }
+    var publishData = function(){
+      var finalXAxis = uniqueFilter(uniqueNames);
+      for (var i = 0; i < executeNames.length; i++) {
+        var finalcount = new Array(),
+        finalDrug = executeNames[i];
+        finalcount.push(finalDrug);
+        for(var symptom in finalXAxis){
+          finalcount.push("jeezy");
+        }
+        columnsData[i] = (finalcount);
+      }
+      console.log(columnsData);
     }
     populateData(executeNames);
   }
