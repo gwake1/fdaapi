@@ -34,6 +34,14 @@
       templateUrl: "views/chart.html",
       controller: "chart"
     })
+    .when("/promise", {
+      templateUrl: "views/promise.html",
+      controller: "PromiseController"
+    })
+    .when("/login", {
+      templateUrl: "views/login.html",
+      controller: "AuthController"
+    })
     .otherwise({ redirectTo: "/" });
   })
 }());

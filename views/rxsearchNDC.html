@@ -6,12 +6,10 @@
 <br>
 <table class="table table-striped">
   <caption><h4>Active Ingredients:</h4></caption>
-  <tr>
-    <th>tty</th>
-  </tr>
   <tr ng-repeat="item in Rx.ingredients">
-    <td>{{item.tty}}</td>
     <td ng-repeat="data in item.conceptProperties">
-      {{data.name}}
+      {{data.name}}<td>
   </tr>
 </table>
+
+<div id="chart"></div>
