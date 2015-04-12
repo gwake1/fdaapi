@@ -4,7 +4,7 @@
     var
     effectsName = [],
     effectsCount = [],
-    url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:%22symbicort%22&count=patient.reaction.reactionmeddrapt.exact";
+    url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:%22aggrenox%22&count=patient.reaction.reactionmeddrapt.exact";
     $http.get(url)
     .success(function(data) {
       console.log(data);

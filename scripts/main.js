@@ -1,6 +1,6 @@
 (function() {
   "use strict";
-  angular.module("myApp", [ "ngRoute", "mgcrea.ngStrap", "ui.utils" ])
+  angular.module("myApp", [ "ngRoute", "mgcrea.ngStrap", "ui.utils", "ngResource" ])
   .config(function($routeProvider) {
     $routeProvider
     .when("/", {
