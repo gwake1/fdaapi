@@ -2,26 +2,10 @@
   // "use strict";
   chart.$inject = [ "$http", "$q", "$resource", "chartFactory" ];
   function chart($http, $q, $resource, chartFactory) {
-    chartFactory.getDrug("symbicort");
-    // var obj = {
-    //   "foo": 1,
-    //   "bar": 2
-    // },
-    // jeezy = [];
-    // for (var key in obj) {
-    //   console.log(obj[key]);
-    // }
-    // var url = "https://api.fda.gov/drug/event.json?search=patient.drug.openfda.brand_name:%22symbicort%22&count=patient.reaction.reactionmeddrapt.exact";
-    // $http.get(url)
-    // .success(function(data){
-    //   console.log(data);
-    //   var gw = data.results;
-    //   for(var key in gw){
-    //     jeezy.push(gw[key].term);
-    //   }
-    //   console.log(jeezy);
-    // })
-  }
+    var drugData = {};
+    var drugList = ["symbicort", "aggrenox"];
+    chartFactory.produceData(drugList);
+  };  
   angular.module("myApp")
   .controller("chart", chart)
 }());
